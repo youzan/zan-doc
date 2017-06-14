@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>API Documentation</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+    <link href="../css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/prism.css" rel="stylesheet" media="all"/>
+    <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+    <!--[if lt IE 9]>
+    <script src="../js/html5.js"></script>
+    <![endif]-->
+    <script src="../js/jquery-1.11.0.min.js"></script>
+    <script src="../js/ui/1.10.4/jquery-ui.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.smooth-scroll.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
+    <script type="text/javascript">
+    function loadExternalCodeSnippets() {
+        Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+            var src = pre.getAttribute('data-src');
+            var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+            var language = 'php';
+
+            var code = document.createElement('code');
+            code.className = 'language-' + language;
+
+            pre.textContent = '';
+
+            code.textContent = 'Loading…';
+
+            pre.appendChild(code);
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', src, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+
+                    if (xhr.status < 400 && xhr.responseText) {
+                        code.textContent = xhr.responseText;
+
+                        Prism.highlightElement(code);
+                    }
+                    else if (xhr.status >= 400) {
+                        code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                    }
+                    else {
+                        code.textContent = '✖ Error: File does not exist or is empty';
+                    }
+                }
+            };
+
+            xhr.send(null);
+        });
+    }
+
+    $(document).ready(function(){
+        loadExternalCodeSnippets();
+    });
+    $('#source-view').on('shown', function () {
+        loadExternalCodeSnippets();
+    })
+</script>
+
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png"/>
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-ellipsis-vertical"></i>
+            </a>
+            <a class="brand" href="../index.html">API Documentation</a>
+
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                                        <li class="dropdown" id="charts-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Charts <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../graphs/class.html">
+                                    <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" id="reports-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Reports <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../reports/errors.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">10</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/markers.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">6</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/deprecated.html">
+                                                                                                            <i class="icon-list-alt"></i>&#160;Deprecated <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="go_to_top">-->
+    <!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
+    <!--</div>-->
+</div>
+
+<div id="___" class="container-fluid">
+        <section class="row-fluid">
+        <div class="span2 sidebar">
+                                <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1000754577"></a>
+                                <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
+            </div>
+            <div id="namespace-1000754577" class="accordion-body collapse in">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/swoole_buffer.html">swoole_buffer</a></li>
+                                                    <li class="class"><a href="../classes/swoole_client.html">swoole_client</a></li>
+                                                    <li class="class"><a href="../classes/swoole_connpool.html">swoole_connpool</a></li>
+                                                    <li class="class"><a href="../classes/swoole_http_client.html">swoole_http_client</a></li>
+                                                    <li class="class"><a href="../classes/swoole_http_request.html">swoole_http_request</a></li>
+                                                    <li class="class"><a href="../classes/swoole_http_response.html">swoole_http_response</a></li>
+                                                    <li class="class"><a href="../classes/swoole_http_server.html">swoole_http_server</a></li>
+                                                    <li class="class"><a href="../classes/swoole_mysql.html">swoole_mysql</a></li>
+                                                    <li class="class"><a href="../classes/swoole_process.html">swoole_process</a></li>
+                                                    <li class="class"><a href="../classes/swoole_redis.html">swoole_redis</a></li>
+                                                    <li class="class"><a href="../classes/swoole_server.html">swoole_server</a></li>
+                                                    <li class="class"><a href="../classes/swoole_server_port.html">swoole_server_port</a></li>
+                                                    <li class="class"><a href="../classes/swoole_timer.html">swoole_timer</a></li>
+                                                    <li class="class"><a href="../classes/swoole_websocket_server.html">swoole_websocket_server</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+    </section>
+    <section class="row-fluid">
+        <div class="span10 offset2">
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <nav>
+                                                <a href="../namespaces/default.html">\</a> <i class="icon-level-up"></i>
+                                            </nav>
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+
+                    <h1><small>\</small>swoole_client</h1>
+                    <p><em>class swoole_client</em></p>
+                    
+                    
+                                        
+                    <section id="summary">
+                        <h2>Summary</h2>
+                        <section class="row-fluid heading">
+                            <section class="span4">
+                                <a href="#methods">Methods</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#properties">Properties</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#constants">Constants</a>
+                            </section>
+                        </section>
+                        <section class="row-fluid public">
+                            <section class="span4">
+                                                                    <a href="../classes/swoole_client.html#method___construct" class="">__construct()</a><br />
+                                                                    <a href="../classes/swoole_client.html#method_set" class="">set()</a><br />
+                                                                    <a href="../classes/swoole_client.html#method_setConnectTimeout" class="">setConnectTimeout()</a><br />
+                                                                    <a href="../classes/swoole_client.html#method_setSendTimeout" class="">setSendTimeout()</a><br />
+                                                                    <a href="../classes/swoole_client.html#method_connect" class="">connect()</a><br />
+                                                                    <a href="../classes/swoole_client.html#method_recv" class="">recv()</a><br />
+                                                                    <a href="../classes/swoole_client.html#method_send" class="">send()</a><br />
+                                                                    <a href="../classes/swoole_client.html#method_sendfile" class="">sendfile()</a><br />
+                                                                    <a href="../classes/swoole_client.html#method_sendto" class="">sendto()</a><br />
+                                                                    <a href="../classes/swoole_client.html#method_sleep" class="">sleep()</a><br />
+                                                                    <a href="../classes/swoole_client.html#method_wakeup" class="">wakeup()</a><br />
+                                                                    <a href="../classes/swoole_client.html#method_isConnected" class="">isConnected()</a><br />
+                                                                    <a href="../classes/swoole_client.html#method_getsockname" class="">getsockname()</a><br />
+                                                                    <a href="../classes/swoole_client.html#method_getpeername" class="">getpeername()</a><br />
+                                                                    <a href="../classes/swoole_client.html#method_close" class="">close()</a><br />
+                                                                    <a href="../classes/swoole_client.html#method_on" class="">on()</a><br />
+                                                                    <a href="../classes/swoole_client.html#method_getSocket" class="">getSocket()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/swoole_client.html#property_errCode" class="">$errCode</a><br />
+                                                                    <a href="../classes/swoole_client.html#property_sock" class="">$sock</a><br />
+                                                                    <a href="../classes/swoole_client.html#property_setting" class="">$setting</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/swoole_client.html#constant_MSG_OOB" class="">MSG_OOB</a><br />
+                                                                    <a href="../classes/swoole_client.html#constant_MSG_PEEK" class="">MSG_PEEK</a><br />
+                                                                    <a href="../classes/swoole_client.html#constant_MSG_DONTWAIT" class="">MSG_DONTWAIT</a><br />
+                                                                    <a href="../classes/swoole_client.html#constant_MSG_WAITALL" class="">MSG_WAITALL</a><br />
+                                                            </section>
+                        </section>
+                        <section class="row-fluid protected">
+                            <section class="span4">
+                                                                    <em>No protected methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No protected properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                        <section class="row-fluid private">
+                            <section class="span4">
+                                                                    <em>No private methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No private properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                    </section>
+                </div>
+                <aside class="span4 detailsbar">
+                                        
+                    
+                    <dl>
+                        <dt>File</dt>
+                            <dd><a href="../files/swoole_client.html"><div class="path-wrapper">swoole_client.php</div></a></dd>
+                                                <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">swoole_client</div></dd>
+                                                <dt>Class hierarchy</dt>
+                            <dd class="hierarchy">
+                                                                                                                                                                    <div class="namespace-wrapper">\swoole_client</div>
+                            </dd>
+
+                        
+                        
+                        
+                        
+                                                                        </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                            <tr>
+                            <th>
+                                since
+                            </th>
+                            <td>
+                                                                    
+                                                            </td>
+                        </tr>
+                                        </table>
+                </aside>
+            </div>
+
+                                    <a id="constants" name="constants"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Constants</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_MSG_OOB" name="constant_MSG_OOB" class="anchor"></a>
+            <article id="constant_MSG_OOB" class="constant">
+                <h3 class="">MSG_OOB</h3>
+                <pre class="signature">MSG_OOB</pre>
+                <p><em>读取带外数据</em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_MSG_PEEK" name="constant_MSG_PEEK" class="anchor"></a>
+            <article id="constant_MSG_PEEK" class="constant">
+                <h3 class="">MSG_PEEK</h3>
+                <pre class="signature">MSG_PEEK</pre>
+                <p><em>recv 方法的第二个参数，窥视socket缓存区中的数据。
+设置MSG_PEEK参数后，recv读取数据不会修改指针，因此下一次调用recv仍然会从上一次的位置起返回数据。</em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_MSG_DONTWAIT" name="constant_MSG_DONTWAIT" class="anchor"></a>
+            <article id="constant_MSG_DONTWAIT" class="constant">
+                <h3 class="">MSG_DONTWAIT</h3>
+                <pre class="signature">MSG_DONTWAIT</pre>
+                <p><em>recv 方法的第二个参数，非阻塞接收数据，无论是否有数据都会立即返回</em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            const
+                        </th>
+                        <td>
+                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_MSG_WAITALL" name="constant_MSG_WAITALL" class="anchor"></a>
+            <article id="constant_MSG_WAITALL" class="constant">
+                <h3 class="">MSG_WAITALL</h3>
+                <pre class="signature">MSG_WAITALL</pre>
+                <p><em>recv 方法的第二个参数，阻塞等待直到收到指定长度的数据后返回。</em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            const
+                        </th>
+                        <td>
+                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                            
+                                    <a id="properties" name="properties"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Properties</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_errCode" name="property_errCode" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$errCode</h3>
+                <pre class="signature">$errCode : integer</pre>
+                <p><em>错误码，当 connect/send/recv/close 失败时，会自动设置 $swoole_client-&gt;errCode 的值。
+errCode 的值等于 Linux errno，可使用 socket_strerror 将错误码转为错误信息。</em></p>
+                
+
+                                <h4>Type</h4>
+                integer
+                &mdash; 错误码                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_sock" name="property_sock" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$sock</h3>
+                <pre class="signature">$sock : integer</pre>
+                <p><em>表示此 socket 连接的文件描述符</em></p>
+                
+
+                                <h4>Type</h4>
+                integer
+                &mdash; socket 连接的描述符                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_setting" name="property_setting" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$setting</h3>
+                <pre class="signature">$setting : array</pre>
+                <p><em>客户端设置的选项，具体见 set() 接口</em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                            
+                                    <a id="methods" name="methods"></a>
+            <div class="row-fluid">
+                <div class="span8 content class"><h2>Methods</h2></div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___construct" name="method___construct" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">__construct()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__construct(integer  <span class="argument">$sock_type</span>, integer  <span class="argument">$is_sync = SWOOLE_SOCK_SYNC</span>, string  <span class="argument">$key = null</span>) </pre>
+                <p><em>__construct swoole_client 构造函数</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$sock_type </td>
+                                <td><p>socket 类型，支持 TCP/UDP、TCP6/UDP6、UinxSock Stream/Dgram 6种</p>
+<pre><code class="language-php"> SWOOLE_SOCK_TCP/SWOOLE_TCP
+ SWOOLE_SOCK_UDP/SWOOLE_UDP
+ SWOOLE_SOCK_TCP6/SWOOLE_TCP6
+ SWOOLE_SOCK_UDP6/SWOOLE_UDP6
+ SWOOLE_SOCK_UNIX_STREAM/SWOOLE_SOCK_UNIX_STREAM
+ SWOOLE_SOCK_UNIX_DGRAM/SWOOLE_UNIX_DGRAM
+ 使用 $sock_type|SWOOLE_SSL可以启用SSL加密，SSL 加密算法相关常量参考全局常量部分</code></pre></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$is_sync </td>
+                                <td><p>表示同步阻塞还是异步非阻塞，默认为同步阻塞</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$key </td>
+                                <td><p>$key用于长连接的Key，默认使用IP:PORT作为key。相同key的连接会被复用</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            3.0.4                                
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_set" name="method_set" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">set()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">set(array  <span class="argument">$settings</span>) : boolean</pre>
+                <p><em>set 设置客户端参数，必须在connect前执行。</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$settings </td>
+                                <td><p>数组，设置</p>
+<pre><code class="language-php">client 端可以使用 set 方法设置一些选项，启用某些特性：
+结束符检测：
+ open_eof_check
+ package_eof
+ package_max_length
+
+长度检测：
+ open_length_check
+ package_length_type
+ package_length_offset
+ package_body_offset
+ package_max_length
+
+Socket 缓冲区尺寸：
+ socket_buffer_size
+
+关闭Nagle合并算法：
+ open_tcp_nodelay
+
+SSL/TLS证书：
+ ssl_cert_file
+ ssl_key_file
+
+绑定IP和端口：
+ bind_address
+ bind_port
+
+Socks5代理设置：
+ socks5_host
+ socks5_port
+ socks5_username
+ socks5_password</code></pre></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                            &mdash; <p>成功返回 true</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            3.0.4                                
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setConnectTimeout" name="method_setConnectTimeout" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setConnectTimeout()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setConnectTimeout(integer  <span class="argument">$timeout</span>) : boolean</pre>
+                <p><em>setConnectTimeout 设置连接超时时间,可重复设置，以最后一次设置为准</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$timeout </td>
+                                <td><p>超时时间，单位ms，设置为0时，不超时</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                            &mdash; <p>设置成功返回true，设置失败返回false</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            3.0.4                                
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setSendTimeout" name="method_setSendTimeout" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setSendTimeout()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setSendTimeout(integer  <span class="argument">$timeout</span>) : boolean</pre>
+                <p><em>setSendTimeout 设置消息发送超时时间,可重复设置，以最后一次设置为准，仅对sendWithCallback接口有效</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$timeout </td>
+                                <td><p>超时时间，单位ms，设置为0时，不超时</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                            &mdash; <p>设置成功返回true，设置失败返回false</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            3.0.4                                
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_connect" name="method_connect" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">connect()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">connect(string  <span class="argument">$host</span>, integer  <span class="argument">$port</span>, integer  <span class="argument">$flag</span>) : boolean</pre>
+                <p><em>connect 连接到远程服务端，与setConnectTimeout结合使用，可支持连接超时</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$host </td>
+                                <td><p>远程服务的地址</p>
+<pre><code class="language-php">说明：
+    使用异步swoole_client时，host不能为域名，必须为ip</code></pre></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$port </td>
+                                <td><p>远程服务的端口</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$flag </td>
+                                <td><p>[optional] 可选字段，默认为 0
+UDP client：$flag=1 表示启用 udp_connect，将绑定 $host 和 $port，此 UDP 连接将丢弃非指定 $host:$port 的数据包。
+TCP client：$flag=1 表示设置为非阻塞 socket，connect 会立即返回。</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                            &mdash; <p>调用成功返回true，调用失败false</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            3.0.4                                
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_recv" name="method_recv" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">recv()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">recv(integer  <span class="argument">$size = 65535</span>, integer  <span class="argument">$flags</span>) : string|false</pre>
+                <p><em>recv 从服务端接收数据</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$size </td>
+                                <td><p>接收数据的缓冲区最大长度</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$flags </td>
+                                <td><p>可以设置一些特殊的 SOCKET 接收设置
+$client-&gt;recv(8192, swoole_client::MSG_PEEK | swoole_client::MSG_WAITALL);</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string|false
+                                            &mdash; <p>成功收到数据返回接收到的字符串，连接关闭返回空字符串，失败返回 false，并设置 $swoole_client-&gt;errCode 属性</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            3.0.4                                
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_send" name="method_send" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">send()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">send(string  <span class="argument">$data</span>, integer  <span class="argument">$flag</span>) : integer|false</pre>
+                <p><em>send 发送数据到服务端，必须在建立连接之后调用</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$data </td>
+                                <td><p>要发送到服务端的数据</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$flag </td>
+                                <td><p>具体意义可以参考 php 官方 send 接口中 flag 的定义，只对同步方式下直作用。如下：</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    integer|false
+                                            &mdash; <p>调用成功返回 errno 值，失败返回 false</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href="http://php.net/manual/en/function.socket-send.php"><span class="namespace-wrapper">http://php.net/manual/en/function.socket-send.php</span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            3.0.4                                
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_sendfile" name="method_sendfile" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">sendfile()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">sendfile(string  <span class="argument">$filename</span>) : boolean</pre>
+                <p><em>sendfile 发送文件到服务端，本函数是基于 sendfile 操作系统调用的。</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$filename </td>
+                                <td><p>要发送的文件路径，如果文件不存在函数返回 false</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                            &mdash; <p>发送成功返回 true，失败返回 false</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            3.0.4                                
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_sendto" name="method_sendto" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">sendto()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">sendto(string  <span class="argument">$ip</span>, integer  <span class="argument">$port</span>, string  <span class="argument">$data</span>) : boolean</pre>
+                <p><em>sendto 向任意 IP:PORT 的主机发送 UDP 数据包，仅支持 SWOOLE_SOCK_UDP/SWOOLE_SOCK_UDP6 类型的 swoole_client 对象。</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$ip </td>
+                                <td><p>目标服务 ip 地址，支持 ipv4/ipv6</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$port </td>
+                                <td><p>目标服务端口</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$data </td>
+                                <td><p>要发送的数据内容，建议不超过 64k</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                            &mdash; <p>成功返回 true，失败返回 false</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            3.0.4                                
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_sleep" name="method_sleep" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">sleep()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">sleep() : boolean</pre>
+                <p><em>sleep 此方法会从事件循环中移除当前 socket 的可读监听，停止接收数据。
+此方法仅停止从 socket 中接收数据，但不会移除可写事件，所以不会影响发送队列
+sleep 操作与 wakeup 作用相反，使用 wakeup 方法可以重新监听可读事件</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                            &mdash; <p>成功返回 true，失败返回 false</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            3.0.4                                
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_wakeup" name="method_wakeup" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">wakeup()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">wakeup() : boolean</pre>
+                <p><em>wakeup 调用此方法会重新监听可读事件，将 socket 连接从睡眠中唤醒。
+如果socket并未进入sleep模式，wakeup操作没有任何作用</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                            &mdash; <p>成功返回 true，失败返回 false</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            3.0.4                                
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_isConnected" name="method_isConnected" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">isConnected()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">isConnected() : boolean</pre>
+                <p><em>isConnected 返回当前客户端的连接状态</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                            &mdash; <p>true 表示当前客户端已经连接到服务端，false 表示当前客户端未连接到服务端</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            3.0.4                                
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getsockname" name="method_getsockname" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getsockname()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getsockname() : array|false</pre>
+                <p><em>getsockname 用于获取客户端socket的本地host:port，必须在连接之后才可以使用。</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    array|false
+                                            &mdash; <p>成功返回一个数组，形如 Array([port] =&gt; 59946，[host] =&gt; 127.0.0.1)，失败返回false</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            3.0.4                                
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getpeername" name="method_getpeername" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getpeername()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getpeername() : array|false</pre>
+                <p><em>getpeername 获取对端 socket 的IP地址和端口，仅支持 SWOOLE_SOCK_UDP/SWOOLE_SOCK_UDP6 类型的 swoole_client 对象。
+UDP协议通信客户端向一台服务器发送数据包后，可能并非由此服务器向客户端发送响应。可以使用此方法获取实际响应的服务器IP:PORT。</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    array|false
+                                            &mdash; <p>成功返回一个数组，形如 Array([port] =&gt; 0，[host] =&gt; 0.0.0.0)，失败返回 false</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            3.0.4                                
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_close" name="method_close" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">close()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">close(boolean  <span class="argument">$is_force = false</span>) : boolean</pre>
+                <p><em>close 关闭连接</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>boolean</td>
+                                <td>$is_force </td>
+                                <td><p>true 表示强制关闭连接,该标记已经废弃</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                            &mdash; <p>操作成功返回 true，失败返回 false</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            3.0.4                                
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_on" name="method_on" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">on()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">on(string  <span class="argument">$event_name</span>, callable  <span class="argument">$callback</span>) : </pre>
+                <p><em>注册异步事件回调函数，调用 on 方法会使当前的 socket 变成非阻塞的</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$event_name </td>
+                                <td><p>事件名，不区分大小写</p>
+<pre><code class="language-php">"connect" 连接成功事件,对应事件的回调函数原型参考onConnect
+      function onConnect(swoole_client $client)
+"receive" 收到数据事件，对应事件的回调函数原型参考onReceive
+   function onReceive(swoole_client $client, string $data)
+"close"   关闭事件，对应事件的回调函数原型参考onClose
+   function onClose(swoole_client $client)
+"error"   网络错误事件，对应事件的回调函数原型参考onError
+   function onError(swoole_client $client)</code></pre></td>
+                            </tr>
+                                                    <tr>
+                                <td>callable</td>
+                                <td>$callback </td>
+                                <td><p>发生 $event_name 事件时的回调函数</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            3.0.4                                
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getSocket" name="method_getSocket" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getSocket()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getSocket() : resource|false</pre>
+                <p><em>getSocket 返回底层的 socket 句柄，返回的对象为 socket 资源句柄</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    resource|false
+                                            &mdash; <p>成功返回 socket 资源句柄，失败返回 false</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            3.0.4                                
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                                    </div>
+    </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label">swoole_client.php</h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/swoole_client.php.txt" class="language-php line-numbers"></pre>
+        </div>
+    </div>
+
+    <footer class="row-fluid">
+        <section class="span10 offset2">
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <section class="row-fluid footer-sections">
+                        <section class="span4">
+                                                        <h1><i class="icon-code"></i></h1>
+                            <div>
+                                <ul>
+                                                                    </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-bar-chart"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../graphs/class.html">Class Hierarchy Diagram</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-pushpin"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../reports/errors.html">Errors</a></li>
+                                    <li><a href="../reports/markers.html">Markers</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <hr />
+                    Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
+                    on June 14th, 2017 at 10:15.
+                </section>
+            </section>
+        </section>
+    </footer>
+</div>
+
+</body>
+</html>
