@@ -191,9 +191,11 @@ class swoole_client
      * ```
      * @param int    $port 远程服务的端口
      * @param int    $flag [optional] 可选字段，默认为 0
-     *                             UDP client：$flag=1 表示启用 udp_connect，将绑定 $host 和 $port，此 UDP 连接将丢弃非指定 $host:$port 的数据包。
-     *                             TCP client：$flag=1 表示设置为非阻塞 socket，connect 会立即返回。
-     *
+     * ```php
+     *  $flag 字段使用说明：    
+     *      UDP client：$flag=1 启用 udp connect，将绑定 $host 和 $port，数据发送使用send接口；$flag = 0 ,数据发送使用sendto 
+     *      TCP client：$flag=1 表示设置为非阻塞 socket;$flag=0,使用阻塞socket，但是在。
+     * ```
      * @return bool 调用成功返回true，调用失败false
      */
     public function connect(string $host, int $port, int $flag = 0)
