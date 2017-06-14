@@ -78,7 +78,7 @@ class swoole_redis
     public function isConnected()
     {
     }
-    
+
     /**
      * setConnectTimeout 设置连接超时时间,可重复设置，以最后一次设置为准
      *
@@ -88,7 +88,7 @@ class swoole_redis
      * @return bool 设置成功返回true，设置失败返回false
      */
     public function setConnectTimeout(int $timeout) { }
-    
+
     /**
      * setQueryTimeout 设置消息发送超时时间,可重复设置，以最后一次设置为准，仅对query生效
      *
@@ -98,7 +98,7 @@ class swoole_redis
      * @return bool 设置成功返回true，设置失败返回false
      */
     public function setQueryTimeout(int $timeout) { }
-    
+
     /**
      * on
      *
@@ -107,27 +107,27 @@ class swoole_redis
      * @param string   $event_name redis 服务回调事件名称，目前只支持两种事件 onClose、onMessage
      * ```php
      * "close"      // 连接关闭事件
-     * "message"    // 订阅消息事件 
+     * "message"    // 订阅消息事件
      * ```
      * @param callable $callback 事件回调函数，参见onClose/onMessage
      * ```php
      * 连接关闭事件回调函数
      * param swoole_redis $redis redis对象
-     * 
+     *
      * function onClose(swoole_redis $redis);
      * ```
      * ```php
      * 订阅消息回调
      * param swoole_redis $redis redis对象
      * param array $message      消息内容
-     * 
+     *
      * 订阅/发布指令没有回调函数，不需要在最后一个参数传入callback
      * 使用订阅/发布消息命名，必须设置onMessage事件回调函数
      * 客户端发出了subscribe命令后，只能执行subscribe， psubscribe，unsubscribe，punsubscribe 这 4 条命令
-     *     
+     *
      * function onMessage(swoole_redis $redis, array $message);
-     *```         
-     * 
+     *```
+     *
      * @return bool 成功返回 true，失败返回 false
      */
     public function on(string $event_name, callable $callback)
@@ -142,12 +142,12 @@ class swoole_redis
      * @param string   $host redis 服务器 ip 地址
      * @param int      $port redis 服务器监听的端口 port
      * @param callable $callback 连接成功后的回调函数,函数原型参考onConnect
-     *                 
+     *
      * ```php
      * 连接事件回调
-     * @param swoole_redis $redis redis对象
-     * @param bool $result 连接结果，true 连接成功，false 连接失败
      * function onConnect(swoole_redis $redis, bool $result);
+     *                    swoole_redis $redis redis对象
+     *                    bool $result 连接结果，true 连接成功，false 连接失败
      * ```
      *
      * @return bool true接口调用成功，false接口调用失败
@@ -181,7 +181,7 @@ class swoole_redis
      * ```php
      * void onResult(swoole_redis $redis，mixed $result)
      * ```
-     * 	
+     *
      * @return bool 成功返回 true，失败返回 false
      */
     public function __call(string $command, array $params)

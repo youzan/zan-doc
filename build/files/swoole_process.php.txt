@@ -17,6 +17,7 @@ class swoole_process
 {
 
     /**
+     * 进程 pid
      * @var int
      */
     public $pid = -1;
@@ -34,6 +35,7 @@ class swoole_process
 
     /**
      * @var int
+     * @internal
      */
     public $id;
 
@@ -281,5 +283,4 @@ class swoole_process
     }
 
 }
-
 

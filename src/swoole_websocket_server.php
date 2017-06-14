@@ -504,10 +504,8 @@ class swoole_websocket_server /*extends \swoole_http_server*/
      *
      * @param int  $fd woker 进程的编号
      * @param int  $from_id [optional] 可选参数，若设置该参数，则只获取通过 reactor 线程 id 为 $from_id 的连接信息
-     * @param bool $ignore_close [optional] 可选参数，默认值为 false，如果设置为 true，即使连接关闭也会返回连接信息
      *
      * @return array|false 如果传入的 fd 存在，将会返回一个数组。如果传入的 fd 不存在或已关闭，返回 false。
-     *         如果 $ignore_close=true，即使连接关闭也返回连接的信息。输出结果示例如下：
      * ```
      * Array
      * (
@@ -633,7 +631,7 @@ class swoole_websocket_server /*extends \swoole_http_server*/
     /**
      * bind 将连接 $fd 绑定到用户自定义$uid,设置 dispatch_mode=5，设置此 $uid 值进行 hash 固定分配，
      * 可以保证某一个 $uid 的连接全部会分配到同一个Worker进程。
-     * 
+     *
 	 * ```
 	 * 在默认的dispatch_mode=2设置下，server会按照socket fd来分配连接数据到不同的worker。
 	 * 因为fd是不稳定的，一个客户端断开后重新连接，fd会发生改变。这样这个客户端的数据就会被分配到别的Worker。

@@ -106,7 +106,7 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="../reports/errors.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">10</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">0</span>
                                 </a>
                             </li>
                             <li>
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1768639566"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-854893227"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1768639566" class="accordion-body collapse in">
+            <div id="namespace-854893227" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -203,8 +203,8 @@
                                                                     <a href="../classes/swoole_mysql.html#method_query" class="">query()</a><br />
                                                                     <a href="../classes/swoole_mysql.html#method_close" class="">close()</a><br />
                                                                     <a href="../classes/swoole_mysql.html#method_on" class="">on()</a><br />
-                                                                    <a href="../classes/swoole_mysql.html#method_begin" class="">begin()</a><br />
                                                                     <a href="../classes/swoole_mysql.html#method_safe_query" class="">safe_query()</a><br />
+                                                                    <a href="../classes/swoole_mysql.html#method_begin" class="">begin()</a><br />
                                                                     <a href="../classes/swoole_mysql.html#method_rollback" class="">rollback()</a><br />
                                                                     <a href="../classes/swoole_mysql.html#method_commit" class="">commit()</a><br />
                                                                     <a href="../classes/swoole_mysql.html#method_isUsedindex" class="">isUsedindex()</a><br />
@@ -707,9 +707,10 @@
 <pre><code class="language-php"> onSQLReady mysql语句执行结果回调
  param swoole_mysqli $link mysql对象
  param $result  false|true|array
-               false: 执行失败，可通过$link对象的error属性获得错误信息，errno属性获得错误码；
-               true:  执行非查询语句结果，读取$link对象的affected_rows属性获得影响的行数，insert_id属性获得Insert操作的自增ID；
-               arrary:执行查询语句结果，$result为结果数组.
+                false: 执行失败，可通过$link对象的error属性获得错误信息，errno属性获得错误码；
+                true:  执行非查询语句结果，读取$link对象的affected_rows属性获得影响的行数，
+                       insert_id属性获得Insert操作的自增ID；
+                rrary:执行查询语句结果，$result为结果数组.
 
  function onSQLReady(swoole_mysqli $link, mixed $result);</code></pre></td>
                             </tr>
@@ -830,20 +831,42 @@ function onClose(swoole_mysql $db);</code></pre></td>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_begin" name="method_begin" class="anchor"></a>
+            <a id="method_safe_query" name="method_safe_query" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">begin()</h3>
+                <h3 class="public ">safe_query()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">begin(callable  <span class="argument">$callback</span>) : false</pre>
-                <p><em>begin，启动一个事务</em></p>
+                <pre class="signature" style="margin-right: 54px;">safe_query(string  <span class="argument">$sql</span>, array  <span class="argument">$bindparam</span>, callable  <span class="argument">$callback</span>) : false</pre>
+                <p><em>safe_query，执行带预处理的查询语句</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
+                                <td>string</td>
+                                <td>$sql </td>
+                                <td><p>要执行的带预处理的 sql 查询语句</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$bindparam </td>
+                                <td><p>绑定$sql中占位符参数支持预处理。
+:与?不可混用、每个占位符都必须绑定参数、
+占位符个数必须与绑定参数个数一致、参数必须定义</p></td>
+                            </tr>
+                                                    <tr>
                                 <td>callable</td>
                                 <td>$callback </td>
-                                <td><p>/// 必选，如onBegin($swoole_sql), $result == true: 执行成功;$result == false: 执行失败；</p></td>
+                                <td><p>回调函数
+必选，如onBegin($swoole_sql),
+$result == true: 执行成功;
+$result == false: 执行失败；</p>
+<pre><code>//带预处理的 sql 示例，2 种点位符示例：
+ $sql = "SELECT COUNT(1) AS cnt FROM zan_test
+         WHERE market_id = :market_id AND goods_id = :goods_id";
+ $bindparam = ["market_id" =&gt; 1, "goods_id" =&gt; 2];
+
+ $sql = "SELECT COUNT(1) AS cnt FROM zan_test WHERE market_id = ? AND goods_id = ?";
+ $bindparam = [1, 2];</code></pre></td>
                             </tr>
                                             </table>
                 
@@ -874,35 +897,31 @@ function onClose(swoole_mysql $db);</code></pre></td>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_safe_query" name="method_safe_query" class="anchor"></a>
+            <a id="method_begin" name="method_begin" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">safe_query()</h3>
+                <h3 class="public ">begin()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">safe_query(\string  <span class="argument">$sql</span>, array  <span class="argument">$bindparam</span>, callable  <span class="argument">$callback</span>) </pre>
-                <p><em></em></p>
+                <pre class="signature" style="margin-right: 54px;">begin(callable  <span class="argument">$callback</span>) : false</pre>
+                <p><em>begin，启动一个事务</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>\string</td>
-                                <td>$sql </td>
-                                <td></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$bindparam </td>
-                                <td></td>
-                            </tr>
-                                                    <tr>
                                 <td>callable</td>
                                 <td>$callback </td>
-                                <td></td>
+                                <td><p>回调函数，必选，
+如onBegin($swoole_sql),
+$result == true: 执行成功;
+$result == false: 执行失败；</p></td>
                             </tr>
                                             </table>
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    false
+                                            &mdash; <p>接口调用失败，true 接口调用成功</p>
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -911,7 +930,14 @@ function onClose(swoole_mysql $db);</code></pre></td>
                                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            3.0.4                                
+                                                    </td>
+                    </tr>
                             </table>
         </aside>
     </div>
@@ -931,7 +957,10 @@ function onClose(swoole_mysql $db);</code></pre></td>
                                                     <tr>
                                 <td>callable</td>
                                 <td>$callback </td>
-                                <td><p>/// 必选，如onRollback($swoole_sql), $result == true: 执行成功;$result == false: 执行失败；</p></td>
+                                <td><p>回调函数，必选，
+如onRollback($swoole_sql),
+$result == true: 执行成功;
+$result == false: 执行失败；</p></td>
                             </tr>
                                             </table>
                 
@@ -966,10 +995,21 @@ function onClose(swoole_mysql $db);</code></pre></td>
             <article class="method">
                 <h3 class="public ">commit()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">commit() : false</pre>
+                <pre class="signature" style="margin-right: 54px;">commit(callable  <span class="argument">$callback</span>) : false</pre>
                 <p><em>commit，提交事务</em></p>
                 
 
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>callable</td>
+                                <td>$callback </td>
+                                <td><p>回调函数，必选，
+如onCommit($swoole_sql),
+$result == true: 执行成功;
+$result == false: 执行失败；</p></td>
+                            </tr>
+                                            </table>
                 
                 
                                     <h4>Returns</h4>
@@ -1122,7 +1162,7 @@ function onClose(swoole_mysql $db);</code></pre></td>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on June 14th, 2017 at 10:15.
+                    on June 14th, 2017 at 15:26.
                 </section>
             </section>
         </section>

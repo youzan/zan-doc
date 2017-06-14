@@ -82,7 +82,7 @@ class swoole_mysql
     public function isConnected()
     {
     }
-    
+
     /**
      * setConnectTimeout 设置连接超时时间,可重复设置，以最后一次设置为准
      *
@@ -92,7 +92,7 @@ class swoole_mysql
      * @return bool 设置成功返回true，设置失败返回false
      */
     public function setConnectTimeout(int $timeout) { }
-    
+
     /**
      * setQueryTimeout 设置消息发送超时时间,可重复设置，以最后一次设置为准，仅对query生效
      *
@@ -102,14 +102,14 @@ class swoole_mysql
      * @return bool 设置成功返回true，设置失败返回false
      */
     public function setQueryTimeout(int $timeout) { }
-    
+
     /**
      * connect 异步连接到 MySql 服务器
      *
      * @since 3.0.4
      *
      * @param array    $server_config MySql 服务器的配置，必须为关联索引数组
-     ```php
+     * ```php
      * $server_config = array(
      *      'host' => '127.0.0.1',  // MySQL服务器的主机地址，支持IPv6（::1）和UnixSocket（unix:/tmp/mysql.sock）
      *      'port' => 3306,         // MySQL服务器监听的端口，可选，默认为3306
@@ -125,7 +125,7 @@ class swoole_mysql
      *  连接事件回调函数
      *  param swoole_mysql $db  mysql对象
      *  param bool         $result连接结果，true，连接成功，false连接失败
-     *  
+     *
      *  function onConnect(swoole_mysql $db, bool $result);
      * ```
      * @return 成功返回 true，失败返回 false
@@ -145,13 +145,14 @@ class swoole_mysql
      *  onSQLReady mysql语句执行结果回调
      *  param swoole_mysqli $link mysql对象
      *  param $result  false|true|array
-     *  			   false: 执行失败，可通过$link对象的error属性获得错误信息，errno属性获得错误码；
-     *  			   true:  执行非查询语句结果，读取$link对象的affected_rows属性获得影响的行数，insert_id属性获得Insert操作的自增ID；
-     *   			   arrary:执行查询语句结果，$result为结果数组.
-     *  
+     *                 false: 执行失败，可通过$link对象的error属性获得错误信息，errno属性获得错误码；
+     *                 true:  执行非查询语句结果，读取$link对象的affected_rows属性获得影响的行数，
+     *                        insert_id属性获得Insert操作的自增ID；
+     *                 rrary:执行查询语句结果，$result为结果数组.
+     *
      *  function onSQLReady(swoole_mysqli $link, mixed $result);
-     *  ```               
-     * 
+     * ```
+     *
      * @return bool 执行成功返回 true，失败返回 false
      */
     public function query(string $sql, callable $callback)
@@ -184,7 +185,7 @@ class swoole_mysql
      * param swoole_mysql $db  mysql对象
      * function onClose(swoole_mysql $db);
      * ```
-     *                 
+     *
      * @return bool 成功返回 true，失败返回 false
      */
     public function on(string $event_name, callable $callback)
@@ -192,37 +193,71 @@ class swoole_mysql
     }
 
     /**
+     * safe_query，执行带预处理的查询语句
+     *
+     * @since 3.0.4
+     *
+     * @param string   $sql       要执行的带预处理的 sql 查询语句
+     * @param array    $bindparam 绑定$sql中占位符参数支持预处理。
+     *                            :与?不可混用、每个占位符都必须绑定参数、
+     *                            占位符个数必须与绑定参数个数一致、参数必须定义
+     * @param callable $callback  回调函数
+     *                            必选，如onBegin($swoole_sql),
+     *                            $result == true: 执行成功;
+     *                            $result == false: 执行失败；
+     *
+     * ```
+     * //带预处理的 sql 示例，2 种点位符示例：
+     *  $sql = "SELECT COUNT(1) AS cnt FROM zan_test
+     *          WHERE market_id = :market_id AND goods_id = :goods_id";
+     *  $bindparam = ["market_id" => 1, "goods_id" => 2];
+     *
+     *  $sql = "SELECT COUNT(1) AS cnt FROM zan_test WHERE market_id = ? AND goods_id = ?";
+     *  $bindparam = [1, 2];
+     * ```
+     * @return false 接口调用失败，true 接口调用成功
+     */
+    public function safe_query(string $sql, array $bindparam,callable $callback) {}
+
+    /**
      * begin，启动一个事务
      *
      * @since 3.0.4
      *
-     * @param callable $callback  /// 必选，如onBegin($swoole_sql), $result == true: 执行成功;$result == false: 执行失败；
+     * @param callable $callback 回调函数，必选，
+     *                           如onBegin($swoole_sql),
+     *                           $result == true: 执行成功;
+     *                           $result == false: 执行失败；
      * @return false 接口调用失败，true 接口调用成功
      */
     public function begin(callable $callback) {}
-    
-    public function safe_query(string $sql, array $bindparam,callable $callback) {}
-    
+
     /**
      * rollback，回滚由begin发起的当前事务
      *
      * @since 3.0.4
      *
-     * @param callable $callback  /// 必选，如onRollback($swoole_sql), $result == true: 执行成功;$result == false: 执行失败；
+     * @param callable $callback 回调函数，必选，
+     *                           如onRollback($swoole_sql),
+     *                           $result == true: 执行成功;
+     *                           $result == false: 执行失败；
      * @return false 接口调用失败，true 接口调用成功
      */
     public function rollback(callable $callback) { }
-    
+
     /**
      * commit，提交事务
      *
      * @since 3.0.4
      *
-     * @param callable $callback  /// 必选，如onCommit($swoole_sql), $result == true: 执行成功;$result == false: 执行失败；
+     * @param callable $callback 回调函数，必选，
+     *                           如onCommit($swoole_sql),
+     *                           $result == true: 执行成功;
+     *                           $result == false: 执行失败；
      * @return false 接口调用失败，true 接口调用成功
      */
-    public function commit() { }
-    
+    public function commit(callable $callback) { }
+
     /**
      * isUsedindex，判断当前查询是否使用索引
      *
@@ -231,7 +266,7 @@ class swoole_mysql
      * @return false 当前查询未使用索引，true 当前查询使用了索引
      */
     public function isUsedindex() {}
-    
+
     /**
      * 转义SQL语句中的特殊字符，避免 SQL 注入攻击。底层基于 mysqlnd 提供的函数实现，需要依赖 PHP 的 mysqlnd 扩展。
      * 编译时需要增加 --enable-mysqlnd 来启用，如果PHP环境中没有 mysqlnd 将会出现编译错误
