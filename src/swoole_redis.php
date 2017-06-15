@@ -90,7 +90,7 @@ class swoole_redis
     public function setConnectTimeout(int $timeout) { }
 
     /**
-     * setQueryTimeout 设置消息发送超时时间,可重复设置，以最后一次设置为准，仅对query生效
+     * setQueryTimeout 设置消息发送超时时间,可重复设置，以最后一次设置为准，仅对非订阅消息生效
      *
      * @since 3.0.4
      *

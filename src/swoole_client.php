@@ -192,9 +192,9 @@ class swoole_client
      * @param int    $port 远程服务的端口
      * @param int    $flag [optional] 可选字段，默认为 0
      * ```php
-     *  $flag 字段使用说明：    
-     *      UDP client：$flag=1 启用 udp connect，将绑定 $host 和 $port，数据发送使用send接口；$flag = 0 ,数据发送使用sendto 
-     *      TCP client：$flag=1 表示设置为非阻塞 socket;$flag=0,使用阻塞socket，但是在。
+     *      $flag 字段使用说明：    
+     *      UDP client：$flag=1 启用 udp connect，将绑定 $host 和 $port，数据发送使用send接口；$flag = 0 ,数据发送使用sendto
+     *      TCP client：$flag=1 表示设置为非阻塞 socket;$flag=0,使用阻塞socket，但是在异步模式下，$flag = 0无效。
      * ```
      * @return bool 调用成功返回true，调用失败false
      */
@@ -218,7 +218,7 @@ class swoole_client
     }
 
     /**
-     * send 发送数据到服务端，必须在建立连接之后调用
+     * send 发送数据到服务端，必须在建立连接之后调用，支持已经连接的client 发送数据
      *
      * @since 3.0.4
      *
@@ -248,7 +248,7 @@ class swoole_client
     }
 
     /**
-     * sendto 向任意 IP:PORT 的主机发送 UDP 数据包，仅支持 SWOOLE_SOCK_UDP/SWOOLE_SOCK_UDP6 类型的 swoole_client 对象。
+     * sendto 向任意 IP:PORT 发送 UDP报文，仅支持 SWOOLE_SOCK_UDP/SWOOLE_SOCK_UDP6 类型的 swoole_client 对象。
      *
      * @since 3.0.4
      *
@@ -334,7 +334,7 @@ class swoole_client
     }
 
     /**
-     * 注册异步事件回调函数，调用 on 方法会使当前的 socket 变成非阻塞的
+     * 注册异步事件回调函数，对异步客户端有效
      *
      * @since 3.0.4
      *
@@ -348,7 +348,14 @@ class swoole_client
      * "close"   关闭事件，对应事件的回调函数原型参考onClose
      *    function onClose(swoole_client $client)
      * "error"   网络错误事件，对应事件的回调函数原型参考onError
-     *    function onError(swoole_client $client)
+     * 		function onError(swoole_client $client)
+     * ```
+     * ```php  
+     * "timeout" 超时事件，仅异步tcp client 支持该事件，事件回调函数原型参考onTcpTimeout
+     * 		注册timeout事件回调，和setConnectTimeout或者setSendTimeout配合使用 
+     * 		@param swoole_client $client 客户端对象  	
+     *		@param int $type 超时类型，SWOOLE_ASYNC_CONNECT_TIMEOUT 连接超时；SWOOLE_ASYNC_RECV_TIMEOUT消息接收超时 
+     *		function onTcpTimeout(swoole_client $client,int $type)
      * ```
      * @param callable $callback 发生 $event_name 事件时的回调函数
      *

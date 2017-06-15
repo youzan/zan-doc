@@ -146,6 +146,18 @@ define("SWOOLE_SOCK_SYNC", 0);
 define("SWOOLE_SOCK_ASYNC", 1);
 
 /**
+ * 异步客户端超时事件类型 连接超时
+ * @since 3.0.4
+ */
+define("SWOOLE_ASYNC_CONNECT_TIMEOUT",1);
+
+/**
+ * 异步客户端超时事件类型 消息接收超时
+ * @since 3.0.4
+ */
+define("SWOOLE_ASYNC_RECV_TIMEOUT",2);
+
+/**
  * SSL 加密方法
  * @since 3.0.4
  */
