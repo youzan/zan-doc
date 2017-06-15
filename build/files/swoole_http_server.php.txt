@@ -601,7 +601,7 @@ class swoole_http_server/* extends \swoole_server*/
      *
      * @return void
      */
-    public function heartbeat(int $if_close_connection = false)
+    public function heartbeat(bool $if_close_connection = false)
     {
     }
 

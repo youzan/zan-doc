@@ -81,7 +81,7 @@ class swoole_connpool
      *  "host" => "127.0.0.1",            // 连接地址， string类型，必选
      *  "port" => 12345                   // 连接端口， int类型，   必选
      * redis 连接池，参考swoole_redis::connect接口的配置项 
-     * mysql 连接池，参考swoole_connect::connect接口的配置项
+     * mysql 连接池，参考swoole_mysql::connect接口的配置项
      * ```
      * @return bool  true设置成功，false设置失败
      *
