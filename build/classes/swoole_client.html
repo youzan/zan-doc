@@ -111,7 +111,7 @@
                             </li>
                             <li>
                                 <a href="../reports/markers.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">6</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
                                 </a>
                             </li>
                             <li>
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1237033155"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-2050591408"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1237033155" class="accordion-body collapse in">
+            <div id="namespace-2050591408" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -528,7 +528,7 @@ errCode 的值等于 Linux errno，可使用 socket_strerror 将错误码转为�
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -604,7 +604,7 @@ Socks5代理设置：
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -648,7 +648,7 @@ Socks5代理设置：
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -692,7 +692,7 @@ Socks5代理设置：
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -726,9 +726,12 @@ Socks5代理设置：
                                                     <tr>
                                 <td>integer</td>
                                 <td>$flag </td>
-                                <td><p>[optional] 可选字段，默认为 0
-UDP client：$flag=1 表示启用 udp_connect，将绑定 $host 和 $port，此 UDP 连接将丢弃非指定 $host:$port 的数据包。
-TCP client：$flag=1 表示设置为非阻塞 socket，connect 会立即返回。</p></td>
+                                <td><p>[optional] 可选字段，默认为 0</p>
+<pre><code class="language-php">     $flag 字段使用说明：
+     UDP client：$flag = 1, 启用 udp connect，将绑定 $host 和 $port，数据发送使用send接口；
+                 $flag = 0, 数据发送使用sendto
+     TCP client：$flag = 1, 表示设置为非阻塞 socket;
+                 $flag = 0, 使用阻塞socket，但是在异步模式下，$flag = 0无效。</code></pre></td>
                             </tr>
                                             </table>
                 
@@ -750,7 +753,7 @@ TCP client：$flag=1 表示设置为非阻塞 socket，connect 会立即返回�
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -800,7 +803,7 @@ $client-&gt;recv(8192, swoole_client::MSG_PEEK | swoole_client::MSG_WAITALL);</p
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -814,7 +817,7 @@ $client-&gt;recv(8192, swoole_client::MSG_PEEK | swoole_client::MSG_WAITALL);</p
                 <h3 class="public ">send()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">send(string  <span class="argument">$data</span>, integer  <span class="argument">$flag</span>) : integer|false</pre>
-                <p><em>send 发送数据到服务端，必须在建立连接之后调用</em></p>
+                <p><em>send 发送数据到服务端，必须在建立连接之后调用，支持已经连接的client 发送数据</em></p>
                 
 
                                     <h4>Parameters</h4>
@@ -851,7 +854,7 @@ $client-&gt;recv(8192, swoole_client::MSG_PEEK | swoole_client::MSG_WAITALL);</p
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -895,7 +898,7 @@ $client-&gt;recv(8192, swoole_client::MSG_PEEK | swoole_client::MSG_WAITALL);</p
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -909,7 +912,7 @@ $client-&gt;recv(8192, swoole_client::MSG_PEEK | swoole_client::MSG_WAITALL);</p
                 <h3 class="public ">sendto()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">sendto(string  <span class="argument">$ip</span>, integer  <span class="argument">$port</span>, string  <span class="argument">$data</span>) : boolean</pre>
-                <p><em>sendto 向任意 IP:PORT 的主机发送 UDP 数据包，仅支持 SWOOLE_SOCK_UDP/SWOOLE_SOCK_UDP6 类型的 swoole_client 对象。</em></p>
+                <p><em>sendto 向任意 IP:PORT 发送 UDP报文，仅支持 SWOOLE_SOCK_UDP/SWOOLE_SOCK_UDP6 类型的 swoole_client 对象。</em></p>
                 
 
                                     <h4>Parameters</h4>
@@ -949,7 +952,7 @@ $client-&gt;recv(8192, swoole_client::MSG_PEEK | swoole_client::MSG_WAITALL);</p
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -987,7 +990,7 @@ sleep 操作与 wakeup 作用相反，使用 wakeup 方法可以重新监听可�
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -1024,7 +1027,7 @@ sleep 操作与 wakeup 作用相反，使用 wakeup 方法可以重新监听可�
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -1060,7 +1063,7 @@ sleep 操作与 wakeup 作用相反，使用 wakeup 方法可以重新监听可�
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -1096,7 +1099,7 @@ sleep 操作与 wakeup 作用相反，使用 wakeup 方法可以重新监听可�
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -1133,7 +1136,7 @@ UDP协议通信客户端向一台服务器发送数据包后，可能并非由�
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -1177,7 +1180,7 @@ UDP协议通信客户端向一台服务器发送数据包后，可能并非由�
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -1191,7 +1194,7 @@ UDP协议通信客户端向一台服务器发送数据包后，可能并非由�
                 <h3 class="public ">on()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">on(string  <span class="argument">$event_name</span>, callable  <span class="argument">$callback</span>) : </pre>
-                <p><em>注册异步事件回调函数，调用 on 方法会使当前的 socket 变成非阻塞的</em></p>
+                <p><em>注册异步事件回调函数，对异步客户端有效</em></p>
                 
 
                                     <h4>Parameters</h4>
@@ -1201,13 +1204,19 @@ UDP协议通信客户端向一台服务器发送数据包后，可能并非由�
                                 <td>$event_name </td>
                                 <td><p>事件名，不区分大小写</p>
 <pre><code class="language-php">"connect" 连接成功事件,对应事件的回调函数原型参考onConnect
-      function onConnect(swoole_client $client)
+          function onConnect(swoole_client $client)
 "receive" 收到数据事件，对应事件的回调函数原型参考onReceive
-   function onReceive(swoole_client $client, string $data)
+          function onReceive(swoole_client $client, string $data)
 "close"   关闭事件，对应事件的回调函数原型参考onClose
-   function onClose(swoole_client $client)
+          function onClose(swoole_client $client)
 "error"   网络错误事件，对应事件的回调函数原型参考onError
-   function onError(swoole_client $client)</code></pre></td>
+          function onError(swoole_client $client)</code></pre>
+<pre><code class="language-php">"timeout" 超时事件，仅异步tcp client 支持该事件，事件回调函数原型参考onTcpTimeout
+          注册timeout事件回调，和setConnectTimeout或者setSendTimeout配合使用
+          @param swoole_client $client 客户端对象
+          @param int $type 超时类型，SWOOLE_ASYNC_CONNECT_TIMEOUT 连接超时；
+                              SWOOLE_ASYNC_RECV_TIMEOUT消息接收超时
+          function onTcpTimeout(swoole_client $client,int $type)</code></pre></td>
                             </tr>
                                                     <tr>
                                 <td>callable</td>
@@ -1233,7 +1242,7 @@ UDP协议通信客户端向一台服务器发送数据包后，可能并非由�
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -1269,7 +1278,7 @@ UDP协议通信客户端向一台服务器发送数据包后，可能并非由�
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -1325,7 +1334,7 @@ UDP协议通信客户端向一台服务器发送数据包后，可能并非由�
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on June 14th, 2017 at 15:26.
+                    on June 15th, 2017 at 15:46.
                 </section>
             </section>
         </section>

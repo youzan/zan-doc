@@ -3,7 +3,7 @@
 /**
  * class swoole_http_request
  *
- * @since 3.0.4
+ * @since 3.1.0
  *
  * @package swoole_http_request
  */
@@ -11,7 +11,7 @@
 /**
  * class swoole_http_request
  *
- * @since 3.0.4
+ * @since 3.1.0
  */
 class swoole_http_request
 {
@@ -83,7 +83,7 @@ class swoole_http_request
     /**
      * rawcontent 获取原始的 POST 包体，用于非 application/x-www-form-urlencoded 格式的 Http POST 请求。
      * 返回原始POST数据，此函数等同于 PHP 的 fopen('php://input')。标准 POST 格式，无法调用此函数
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @return bool 成功返回 true，失败返回 false
      */
@@ -94,7 +94,7 @@ class swoole_http_request
     /**
      * __destruct swoole_http_client 析构函数
      *
-     * @since 3.0.4
+     * @since 3.1.0
      * @internal
      *
      */

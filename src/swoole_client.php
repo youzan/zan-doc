@@ -2,7 +2,7 @@
 /**
  * class swoole_client
  *
- * @since 3.0.4
+ * @since 3.1.0
  *
  * @package swoole_client
  */
@@ -10,7 +10,7 @@
 /**
  * class swoole_client
  *
- * @since 3.0.4
+ * @since 3.1.0
  */
 class swoole_client
 {
@@ -78,7 +78,7 @@ class swoole_client
     /**
      * __construct swoole_client 构造函数
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param int    $sock_type socket 类型，支持 TCP/UDP、TCP6/UDP6、UinxSock Stream/Dgram 6种
      * ```php
@@ -101,7 +101,7 @@ class swoole_client
     /**
      * __destruct 析构函数
      *
-     * @since 3.0.4
+     * @since 3.1.0
      * @internal
      *
      */
@@ -112,7 +112,7 @@ class swoole_client
     /**
      * set 设置客户端参数，必须在connect前执行。
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param array $settings 数组，设置
      * ```php
@@ -158,7 +158,7 @@ class swoole_client
     /**
      * setConnectTimeout 设置连接超时时间,可重复设置，以最后一次设置为准
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param int $timeout 超时时间，单位ms，设置为0时，不超时
      * @return bool 设置成功返回true，设置失败返回false
@@ -170,7 +170,7 @@ class swoole_client
     /**
      * setSendTimeout 设置消息发送超时时间,可重复设置，以最后一次设置为准，仅对sendWithCallback接口有效
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param int $timeout 超时时间，单位ms，设置为0时，不超时
      * @return bool 设置成功返回true，设置失败返回false
@@ -182,7 +182,7 @@ class swoole_client
     /**
      * connect 连接到远程服务端，与setConnectTimeout结合使用，可支持连接超时
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param string $host 远程服务的地址
      * ```php
@@ -193,8 +193,10 @@ class swoole_client
      * @param int    $flag [optional] 可选字段，默认为 0
      * ```php
      *      $flag 字段使用说明：    
-     *      UDP client：$flag=1 启用 udp connect，将绑定 $host 和 $port，数据发送使用send接口；$flag = 0 ,数据发送使用sendto
-     *      TCP client：$flag=1 表示设置为非阻塞 socket;$flag=0,使用阻塞socket，但是在异步模式下，$flag = 0无效。
+     *      UDP client：$flag = 1, 启用 udp connect，将绑定 $host 和 $port，数据发送使用send接口；
+     *                  $flag = 0, 数据发送使用sendto
+     *      TCP client：$flag = 1, 表示设置为非阻塞 socket;
+     *                  $flag = 0, 使用阻塞socket，但是在异步模式下，$flag = 0无效。
      * ```
      * @return bool 调用成功返回true，调用失败false
      */
@@ -205,7 +207,7 @@ class swoole_client
     /**
      * recv 从服务端接收数据
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param int $size 接收数据的缓冲区最大长度
      * @param int $flags 可以设置一些特殊的 SOCKET 接收设置
@@ -220,7 +222,7 @@ class swoole_client
     /**
      * send 发送数据到服务端，必须在建立连接之后调用，支持已经连接的client 发送数据
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param string $data 要发送到服务端的数据
      * @param int    $flag 具体意义可以参考 php 官方 send 接口中 flag 的定义，只对同步方式下直作用。如下：
@@ -237,7 +239,7 @@ class swoole_client
     /**
      * sendfile 发送文件到服务端，本函数是基于 sendfile 操作系统调用的。
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param string $filename 要发送的文件路径，如果文件不存在函数返回 false
      *
@@ -250,7 +252,7 @@ class swoole_client
     /**
      * sendto 向任意 IP:PORT 发送 UDP报文，仅支持 SWOOLE_SOCK_UDP/SWOOLE_SOCK_UDP6 类型的 swoole_client 对象。
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param string $ip 目标服务 ip 地址，支持 ipv4/ipv6
      * @param int    $port 目标服务端口
@@ -267,7 +269,7 @@ class swoole_client
      * 此方法仅停止从 socket 中接收数据，但不会移除可写事件，所以不会影响发送队列
      * sleep 操作与 wakeup 作用相反，使用 wakeup 方法可以重新监听可读事件
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @return bool 成功返回 true，失败返回 false
      */
@@ -279,7 +281,7 @@ class swoole_client
      * wakeup 调用此方法会重新监听可读事件，将 socket 连接从睡眠中唤醒。
      * 如果socket并未进入sleep模式，wakeup操作没有任何作用
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @return bool 成功返回 true，失败返回 false
      */
@@ -290,7 +292,7 @@ class swoole_client
     /**
      * isConnected 返回当前客户端的连接状态
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @return bool true 表示当前客户端已经连接到服务端，false 表示当前客户端未连接到服务端
      */
@@ -301,7 +303,7 @@ class swoole_client
     /**
      * getsockname 用于获取客户端socket的本地host:port，必须在连接之后才可以使用。
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @return array|false 成功返回一个数组，形如 Array([port] => 59946，[host] => 127.0.0.1)，失败返回false
      */
@@ -313,7 +315,7 @@ class swoole_client
      * getpeername 获取对端 socket 的IP地址和端口，仅支持 SWOOLE_SOCK_UDP/SWOOLE_SOCK_UDP6 类型的 swoole_client 对象。
      * UDP协议通信客户端向一台服务器发送数据包后，可能并非由此服务器向客户端发送响应。可以使用此方法获取实际响应的服务器IP:PORT。
      *
-     * @since 3.0.4
+     * @since 3.1.0
      * @return array|false 成功返回一个数组，形如 Array([port] => 0，[host] => 0.0.0.0)，失败返回 false
      */
     public function getpeername()
@@ -323,7 +325,7 @@ class swoole_client
     /**
      * close 关闭连接
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param bool $is_force true 表示强制关闭连接,该标记已经废弃
      *
@@ -336,26 +338,27 @@ class swoole_client
     /**
      * 注册异步事件回调函数，对异步客户端有效
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      *
      * @param string   $event_name 事件名，不区分大小写
      * ```php
      * "connect" 连接成功事件,对应事件的回调函数原型参考onConnect
-     * 	  function onConnect(swoole_client $client)
+     *           function onConnect(swoole_client $client)
      * "receive" 收到数据事件，对应事件的回调函数原型参考onReceive
-     *    function onReceive(swoole_client $client, string $data)
+     *           function onReceive(swoole_client $client, string $data)
      * "close"   关闭事件，对应事件的回调函数原型参考onClose
-     *    function onClose(swoole_client $client)
+     *           function onClose(swoole_client $client)
      * "error"   网络错误事件，对应事件的回调函数原型参考onError
-     * 		function onError(swoole_client $client)
+     *           function onError(swoole_client $client)
      * ```
      * ```php  
      * "timeout" 超时事件，仅异步tcp client 支持该事件，事件回调函数原型参考onTcpTimeout
-     * 		注册timeout事件回调，和setConnectTimeout或者setSendTimeout配合使用 
-     * 		@param swoole_client $client 客户端对象  	
-     *		@param int $type 超时类型，SWOOLE_ASYNC_CONNECT_TIMEOUT 连接超时；SWOOLE_ASYNC_RECV_TIMEOUT消息接收超时 
-     *		function onTcpTimeout(swoole_client $client,int $type)
+     *           注册timeout事件回调，和setConnectTimeout或者setSendTimeout配合使用
+     *           @param swoole_client $client 客户端对象
+     *           @param int $type 超时类型，SWOOLE_ASYNC_CONNECT_TIMEOUT 连接超时；
+     *                               SWOOLE_ASYNC_RECV_TIMEOUT消息接收超时
+     *           function onTcpTimeout(swoole_client $client,int $type)
      * ```
      * @param callable $callback 发生 $event_name 事件时的回调函数
      *
@@ -368,7 +371,7 @@ class swoole_client
     /**
      * getSocket 返回底层的 socket 句柄，返回的对象为 socket 资源句柄
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @return resource|false 成功返回 socket 资源句柄，失败返回 false
      */

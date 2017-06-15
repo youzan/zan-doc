@@ -4,7 +4,7 @@
  * class swoole_redis
  * 异步 Redis 客户端
  *
- * @since 3.0.4
+ * @since 3.1.0
  *
  * @package swoole_redis
  */
@@ -12,7 +12,7 @@
 /**
  * class swoole_redis
  *
- * @since 3.0.4
+ * @since 3.1.0
  */
 class swoole_redis
 {
@@ -51,7 +51,7 @@ class swoole_redis
     /**
      * __construct Redis 客户端对象构造函数
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      */
     public function __construct()
@@ -61,7 +61,7 @@ class swoole_redis
     /**
      * __destruct
      *
-     * @since 3.0.4
+     * @since 3.1.0
      * @internal
      */
     public function __destruct()
@@ -71,7 +71,7 @@ class swoole_redis
     /**
      * isConnected 判断连接是否正常
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      *@return bool true 处于连接状态，false 非连接状态
      */
@@ -82,7 +82,7 @@ class swoole_redis
     /**
      * setConnectTimeout 设置连接超时时间,可重复设置，以最后一次设置为准
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param int $timeout 超时时间，单位ms，设置为0时，不超时
      * @return bool 设置成功返回true，设置失败返回false
@@ -92,7 +92,7 @@ class swoole_redis
     /**
      * setQueryTimeout 设置消息发送超时时间,可重复设置，以最后一次设置为准，仅对非订阅消息生效
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param int $timeout 超时时间，单位ms，设置为0时，不超时
      * @return bool 设置成功返回true，设置失败返回false
@@ -102,7 +102,7 @@ class swoole_redis
     /**
      * on
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param string   $event_name redis 服务回调事件名称，目前只支持两种事件 onClose、onMessage
      * ```php
@@ -123,7 +123,8 @@ class swoole_redis
      *
      * 订阅/发布指令没有回调函数，不需要在最后一个参数传入callback
      * 使用订阅/发布消息命名，必须设置onMessage事件回调函数
-     * 客户端发出了subscribe命令后，只能执行subscribe， psubscribe，unsubscribe，punsubscribe 这 4 条命令
+     * 客户端发出了subscribe命令后，只能执行
+     * subscribe， psubscribe，unsubscribe，punsubscribe 这 4 条命令
      *
      * function onMessage(swoole_redis $redis, array $message);
      *```
@@ -137,7 +138,7 @@ class swoole_redis
     /**
      * connect 连接到 Redis 服务端
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param string   $host redis 服务器 ip 地址
      * @param int      $port redis 服务器监听的端口 port
@@ -159,7 +160,7 @@ class swoole_redis
     /**
      * close 关闭 Redis 连接
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @return bool 成功返回 true，失败返回 false
      */
@@ -170,14 +171,15 @@ class swoole_redis
     /**
      * __call 魔术方法，方法名会映射为Redis指令，参数作为Redis指令的参数。
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @link https://redis.io/commands
      * @param string $command 调用函数名
      * ```php
      *  调用函数名如 get、set、hset，必须为合法的 Redis 指令，subscribe 类型的命令除外
      * ```
-     * @param array  $params  函数对应的参数列表 列表最后的元素是结果回调函数，参见，onResult； 其它参数必须为字符串。
+     * @param array $params 函数对应的参数列表 列表最后的元素是结果回调函数，
+     *                      参见，onResult； 其它参数必须为字符串。
      * ```php
      * void onResult(swoole_redis $redis，mixed $result)
      * ```

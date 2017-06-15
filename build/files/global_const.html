@@ -111,7 +111,7 @@
                             </li>
                             <li>
                                 <a href="../reports/markers.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">6</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
                                 </a>
                             </li>
                             <li>
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-421855496"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1642216094"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-421855496" class="accordion-body collapse in">
+            <div id="namespace-1642216094" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -222,7 +222,7 @@ swoole.unixsock_buffer_size = 8388608</p>
             <article id="constant_SWOOLE_VERSION" class="constant">
                 <h3 class="">SWOOLE_VERSION</h3>
                 <pre class="signature">SWOOLE_VERSION</pre>
-                <p><em>当前 swoole 版本号，字符串类型，如 3.0.4</em></p>
+                <p><em>当前 swoole 版本号，字符串类型，如 3.1.0</em></p>
                 
             </article>
         </div>
@@ -360,7 +360,7 @@ swoole.unixsock_buffer_size = 8388608</p>
             <article id="constant_SWOOLE_PACKET" class="constant">
                 <h3 class="">SWOOLE_PACKET</h3>
                 <pre class="signature">SWOOLE_PACKET</pre>
-                <p><em></em></p>
+                <p><em>标志位，用于支持 TCP 透传模式</em></p>
                 
             </article>
         </div>
@@ -398,7 +398,7 @@ swoole.unixsock_buffer_size = 8388608</p>
             <article id="constant_SWOOLE_IPC_UNSOCK" class="constant">
                 <h3 class="">SWOOLE_IPC_UNSOCK</h3>
                 <pre class="signature">SWOOLE_IPC_UNSOCK</pre>
-                <p><em></em></p>
+                <p><em>worker 和 task 进程间通信方式, unix socket 模式，默认模式</em></p>
                 
             </article>
         </div>
@@ -416,14 +416,6 @@ swoole.unixsock_buffer_size = 8388608</p>
                         </th>
                         <td>
                                                             
-                                                    </td>
-                    </tr>
-                                    <tr>
-                        <th>
-                            todo
-                        </th>
-                        <td>
-                                                            <p>用法待查证，应该是 worker 和 taks 进程通信方式</p>
                                                     </td>
                     </tr>
                                     <tr>
@@ -444,7 +436,7 @@ swoole.unixsock_buffer_size = 8388608</p>
             <article id="constant_SWOOLE_IPC_MSGQUEUE" class="constant">
                 <h3 class="">SWOOLE_IPC_MSGQUEUE</h3>
                 <pre class="signature">SWOOLE_IPC_MSGQUEUE</pre>
-                <p><em></em></p>
+                <p><em>worker 和 task 进程间通信方式, 使用消息队列通信</em></p>
                 
             </article>
         </div>
@@ -462,14 +454,6 @@ swoole.unixsock_buffer_size = 8388608</p>
                         </th>
                         <td>
                                                             
-                                                    </td>
-                    </tr>
-                                    <tr>
-                        <th>
-                            todo
-                        </th>
-                        <td>
-                                                            <p>用法待查证</p>
                                                     </td>
                     </tr>
                                     <tr>
@@ -1017,6 +1001,82 @@ swoole.unixsock_buffer_size = 8388608</p>
                 <h3 class="">SWOOLE_SOCK_ASYNC</h3>
                 <pre class="signature">SWOOLE_SOCK_ASYNC</pre>
                 <p><em>swoole_client构造函数参数，异步客户端</em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                <dt>File</dt>
+                <dd><a href=""><div class="path-wrapper">global_const.php</div></a></dd>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            package
+                        </th>
+                        <td>
+                                                            <p>global_const</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                        <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_SWOOLE_ASYNC_CONNECT_TIMEOUT" name="constant_SWOOLE_ASYNC_CONNECT_TIMEOUT" class="anchor"></a>
+            <article id="constant_SWOOLE_ASYNC_CONNECT_TIMEOUT" class="constant">
+                <h3 class="">SWOOLE_ASYNC_CONNECT_TIMEOUT</h3>
+                <pre class="signature">SWOOLE_ASYNC_CONNECT_TIMEOUT</pre>
+                <p><em>异步客户端超时事件类型 连接超时</em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                <dt>File</dt>
+                <dd><a href=""><div class="path-wrapper">global_const.php</div></a></dd>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            package
+                        </th>
+                        <td>
+                                                            <p>global_const</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                        <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_SWOOLE_ASYNC_RECV_TIMEOUT" name="constant_SWOOLE_ASYNC_RECV_TIMEOUT" class="anchor"></a>
+            <article id="constant_SWOOLE_ASYNC_RECV_TIMEOUT" class="constant">
+                <h3 class="">SWOOLE_ASYNC_RECV_TIMEOUT</h3>
+                <pre class="signature">SWOOLE_ASYNC_RECV_TIMEOUT</pre>
+                <p><em>异步客户端超时事件类型 消息接收超时</em></p>
                 
             </article>
         </div>
@@ -2202,7 +2262,7 @@ AIO线程本身是同步阻塞的。所以并非真正的异步IO。</em></p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on June 14th, 2017 at 15:26.
+                    on June 15th, 2017 at 15:46.
                 </section>
             </section>
         </section>

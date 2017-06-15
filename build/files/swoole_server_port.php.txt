@@ -2,7 +2,7 @@
 /**
  * class swoole_server_port
  *
- * @since 3.0.4
+ * @since 3.1.0
  *
  * @package swoole_server_port
  */
@@ -10,7 +10,7 @@
 /**
  * class swoole_server_port
  *
- * @since 3.0.4
+ * @since 3.1.0
  */
 class swoole_server_port
 {
@@ -85,7 +85,7 @@ class swoole_server_port
      *  });
      * ```
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      */
     public function __construct()
@@ -95,7 +95,7 @@ class swoole_server_port
     /**
      * __destruct
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @internal
      *
@@ -108,12 +108,14 @@ class swoole_server_port
     /**
      * set 监听端口调用set方法只能设置一些特定的参数，无法修改全局的Server设置。
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param array $set 数组
      * ```php
      *  监听端口未设置任何参数，将会继承主服务器的相关配置
-     *  Http/WebSocket服务器，如果未设置协议参数，监听的端口仍然会设置为Http或WebSocket协议，并且不会执行为端口设置的onReceive回调
+     *  Http/WebSocket服务器，如果未设置协议参数，监听的端口仍然会设置为Http或WebSocket协议，
+     *  并且不会执行为端口设置的onReceive回调
+     *
      *  可用的参数列表
      *      socket参数，如backlog、TCP_KEEPALIVE、open_tcp_nodelay、tcp_defer_accept等
      *      协议相关，如open_length_check、open_eof_check、package_length_type等
@@ -137,7 +139,7 @@ class swoole_server_port
     /**
      * on 监听端口使用 on 方法可以设置部分回调函数。
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param $name
      * @param $callback

@@ -4,7 +4,7 @@
  * class swoole_http_client
  * http 客户端
  *
- * @since 3.0.4
+ * @since 3.1.0
  *
  * @package swoole_http_client
  */
@@ -12,7 +12,7 @@
 /**
  * class swoole_http_client
  *
- * @since 3.0.4
+ * @since 3.1.0
  */
 class swoole_http_client
 {
@@ -91,7 +91,7 @@ class swoole_http_client
     /**
      * __construct swoole_http_client 构造函数
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param string $host 目标主机地址,必须为ip地址，不能为域名
      * @param int    $port [optional] 目标端口，用户可配，默认80
@@ -105,7 +105,7 @@ class swoole_http_client
     /**
      * __destruct swoole_http_client 析构函数
      *
-     * @since 3.0.4
+     * @since 3.1.0
      * @internal
      *
      */
@@ -116,7 +116,7 @@ class swoole_http_client
     /**
      * set 配置客户端的一些选项
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param array $settings 设置http客户端配置选项，
      *```php
@@ -140,7 +140,7 @@ class swoole_http_client
     /**
      * setMethod 设置 Http 请求方法，仅在当前请求有效，发送请求后会立即清除 method 设置
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param string $method 设置请求方法，必须是符合 http 标准的方法名称
      *```php
@@ -157,7 +157,7 @@ class swoole_http_client
     /**
      * setHeaders 设置 Http 请求头
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param array $headers 键值对应的数组，映射为 key-value 形式的http标准头格式.
      * ```php
@@ -174,14 +174,15 @@ class swoole_http_client
     /**
      * setCookies 设置 cookie
      * 
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param array $cookies 设置cookies，须为键值对应数组形式
      *
      *```php
      *  说明：
      *     设置 COOKIE 后在客户端对象存活期间会持续保存；
-     *     服务端设置的COOKIE会合并到cookies中，可读取对象cookies 属性获得当前 Http 客户端的 COOKIE 信息
+     *     服务端设置的COOKIE会合并到cookies中，
+     *     可读取对象cookies 属性获得当前 Http 客户端的 COOKIE 信息
      *```
      * @return bool 成功返回 true，失败返回 false
      */
@@ -192,7 +193,7 @@ class swoole_http_client
     /**
      * setData  设置 Http 请求的包体 body
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param string $data 字符串格式
      * ```php
@@ -209,7 +210,7 @@ class swoole_http_client
     /**
      * execute 更底层的 Http 请求方法，需要代码中调用 setMethod 和 setData 等接口设置请求的方法和数据。
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param string   $path     uri
      * @param callable $callback 回调函数，原型参考onRequest
@@ -228,7 +229,7 @@ class swoole_http_client
     /**
      * push  向对端推送数据，长度最大不得超过2M，只用于 websocket
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param string $data 要发送的数据内容
      * @param int    $opcode [optional]  指定发送数据内容的格式，默认为文本 WEBSOCKET_OPCODE_TEXT_FRAME，值为 1。
@@ -244,7 +245,7 @@ class swoole_http_client
     /**
      * get  发送 get 请求
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param string   $path 设置uri路径，如/index.html，注意这里不能传入http://domain
      * @param callable $callback 调用成功或失败后回调此函数，参考onRequest
@@ -258,7 +259,7 @@ class swoole_http_client
     /**
      * post  发送 post 请求
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param string       $path 设置uri路径，注意这里不能传入http://domain
      * @param string|array $data 发送起请求的 body 数据，如果 $data 为数组底层自动会打包为x-www-form-urlencoded格式的POST内容，
@@ -275,7 +276,7 @@ class swoole_http_client
      * upgrade  发起 WebSocket 握手请求，并将连接升级为 WebSocket
      * 使用该方法必须使用on设置onMessage 回调函数
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param string   $path URL路径
      * @param callable $callback 握手成功或失败后回调此函数
@@ -289,7 +290,7 @@ class swoole_http_client
     /**
      * isConnected  判断当前连接是否处于 active 状态
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @return bool active 状态返回 true，否则返回 false
      */
@@ -300,7 +301,7 @@ class swoole_http_client
     /**
      * close 关闭连接，http_client 调用 close 关闭连接后，如果再次请求 get、post等方法，底层会重新连接服务端
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @return bool 成功返回 true，失败返回 false
      */
@@ -311,7 +312,7 @@ class swoole_http_client
     /**
      * on 注册 http_client 事件回调函数
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param string   $event_name 回调事件名（大小写不敏感）
      * ```php
@@ -320,7 +321,8 @@ class swoole_http_client
      * "message"    // websocket 消息事件
      * "close"      // 连接关闭事件
      * ```
-     * @param callable $callback 回调函数，必须是可调用的，函数原型参考onConnect，onError，onClose，onMessage
+     * @param callable $callback 回调函数，必须是可调用的，
+     *                 函数原型参考onConnect，onError，onClose，onMessage
      * ```php
      * param swoole_http_client $client   http_client对象
      * function onConnect($swoole_http_client $client)

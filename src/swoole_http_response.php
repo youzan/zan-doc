@@ -3,7 +3,7 @@
 /**
  * class swoole_http_response
  *
- * @since 3.0.4
+ * @since 3.1.0
  *
  * @package swoole_http_response
  */
@@ -11,7 +11,7 @@
 /**
  * class swoole_http_response
  *
- * @since 3.0.4
+ * @since 3.1.0
  */
 class swoole_http_response
 {
@@ -37,7 +37,7 @@ class swoole_http_response
     /**
      * cookie 设置 HTTP 响应的 cookie 信息。此方法参数与 PHP 的 setcookie 完全一致。
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param string $name key 的名称，小写
      * @param string $value [optional]  $name 对应的 value 值
@@ -56,7 +56,7 @@ class swoole_http_response
     /**
      * rawcookie
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param $name
      * @param $value [optional]
@@ -66,7 +66,6 @@ class swoole_http_response
      * @param $secure [optional]
      * @param $httponly [optional]
      *
-     * @todo 。。不删除
      * @return
      */
     public function rawcookie($name, $value = null, $expires = null, $path = null, $domain = null, $secure = null, $httponly = null)
@@ -75,7 +74,7 @@ class swoole_http_response
 
     /**
      * status 发送 Http 状态码
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param int $http_code 必须为合法的 HttpCode，如200， 502， 301, 404等，否则会报错
      *                       必须在 $response->end 之前执行 status
@@ -90,7 +89,7 @@ class swoole_http_response
      * gzip 启用Http GZIP压缩。压缩可以减小HTML内容的尺寸，有效节省网络带宽，提高响应时间。
      * 必须在write/end发送内容之前执行gzip，否则会抛出错误。
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param int $compress_level [optional] 压缩等级，范围是1-9，等级越高压缩后的尺寸越小，但CPU消耗更多。默认为1
      *
@@ -106,7 +105,7 @@ class swoole_http_response
      * $value必须填写，示例：
      * $responser->header('Content-Type', 'image/jpeg');
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param string $key Http头的Key
      * @param string $value Http头的Value
@@ -123,7 +122,7 @@ class swoole_http_response
      * $content 要发送的数据内容，最大长度不得超过2M
      * 使用 write 分段发送数据后，end 方法将不接受任何参数
      * 调用 end 方法后会发送一个长度为 0 的 Chunk 表示数据传输完毕
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param string $content
      *
@@ -136,7 +135,7 @@ class swoole_http_response
     /**
      * end 发送Http响应体，并结束请求处理。
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param string $content [optional] 向客户端浏览器发送的 html 内容
      *
@@ -149,7 +148,7 @@ class swoole_http_response
     /**
      * sendfile 发送文件到浏览器。
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param string $filename 要发送的文件名称
      *
@@ -162,7 +161,7 @@ class swoole_http_response
     /**
      * __destruct 析构函数
      *
-     * @since 3.0.4
+     * @since 3.1.0
      * @internal
      *
      */

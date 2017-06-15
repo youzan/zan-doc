@@ -111,7 +111,7 @@
                             </li>
                             <li>
                                 <a href="../reports/markers.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">6</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
                                 </a>
                             </li>
                             <li>
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-854893227"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-190979630"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-854893227" class="accordion-body collapse in">
+            <div id="namespace-190979630" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -489,7 +489,7 @@
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -525,7 +525,7 @@
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -569,7 +569,7 @@
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -613,7 +613,7 @@
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -637,13 +637,15 @@
                                 <td>$server_config </td>
                                 <td><p>MySql 服务器的配置，必须为关联索引数组</p>
 <pre><code class="language-php">$server_config = array(
-     'host' =&gt; '127.0.0.1',  // MySQL服务器的主机地址，支持IPv6（::1）和UnixSocket（unix:/tmp/mysql.sock）
-     'port' =&gt; 3306,         // MySQL服务器监听的端口，可选，默认为3306
-     'user' =&gt; 'root',       // 用户名，必填
-     'password' =&gt; '123456', // 密码，必填
-     'database' =&gt; 'test',   // 要连接的数据库，必填
-     'timeout' =&gt; '2.0',     // 超时时间，可选，浮点数，默认值为 1.0 秒
-     'charset' =&gt; 'utf8',    // 设置客户端字符集，可选，默认使用 Server 返回的字符集；不存在会抛出异常
+ 'host' =&gt; '127.0.0.1',  // MySQL服务器的主机地址，支持IPv6（::1）
+                         // 和UnixSocket（unix:/tmp/mysql.sock）
+ 'port' =&gt; 3306,         // MySQL服务器监听的端口，可选，默认为3306
+ 'user' =&gt; 'root',       // 用户名，必填
+ 'password' =&gt; '123456', // 密码，必填
+ 'database' =&gt; 'test',   // 要连接的数据库，必填
+ 'timeout' =&gt; '2.0',     // 超时时间，可选，浮点数，默认值为 1.0 秒
+ 'charset' =&gt; 'utf8',    // 设置客户端字符集，可选，
+                         //默认使用 Server 返回的字符集；不存在会抛出异常
 );</code></pre></td>
                             </tr>
                                                     <tr>
@@ -676,7 +678,7 @@
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -705,12 +707,12 @@
                                 <td>$callback </td>
                                 <td><p>执行成功后回调此函数，函数原型参见onSQLReady</p>
 <pre><code class="language-php"> onSQLReady mysql语句执行结果回调
- param swoole_mysqli $link mysql对象
- param $result  false|true|array
-                false: 执行失败，可通过$link对象的error属性获得错误信息，errno属性获得错误码；
-                true:  执行非查询语句结果，读取$link对象的affected_rows属性获得影响的行数，
+ $link mysql对象
+ $result  false|true|array
+          false: 失败，可通过$link对象的error属性获得错误信息，errno属性获得错误码；
+          true: 执行非查询语句结果，读取$link对象的affected_rows属性获得影响的行数，
                        insert_id属性获得Insert操作的自增ID；
-                rrary:执行查询语句结果，$result为结果数组.
+          array: 执行查询语句结果，$result为结果数组.
 
  function onSQLReady(swoole_mysqli $link, mixed $result);</code></pre></td>
                             </tr>
@@ -734,7 +736,7 @@
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -769,7 +771,7 @@
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -822,7 +824,7 @@ function onClose(swoole_mysql $db);</code></pre></td>
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -888,7 +890,7 @@ $result == false: 执行失败；</p>
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -935,7 +937,7 @@ $result == false: 执行失败；</p></td>
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -982,7 +984,7 @@ $result == false: 执行失败；</p></td>
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -1029,7 +1031,7 @@ $result == false: 执行失败；</p></td>
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -1065,7 +1067,7 @@ $result == false: 执行失败；</p></td>
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -1162,7 +1164,7 @@ $result == false: 执行失败；</p></td>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on June 14th, 2017 at 15:26.
+                    on June 15th, 2017 at 15:46.
                 </section>
             </section>
         </section>

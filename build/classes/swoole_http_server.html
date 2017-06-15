@@ -111,7 +111,7 @@
                             </li>
                             <li>
                                 <a href="../reports/markers.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">6</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
                                 </a>
                             </li>
                             <li>
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1015676239"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1571147303"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1015676239" class="accordion-body collapse in">
+            <div id="namespace-1571147303" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -490,7 +490,7 @@
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -503,48 +503,125 @@
             <article class="method">
                 <h3 class="public ">on()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">on(  <span class="argument">$event_name</span>,   <span class="argument">$callback</span>) : </pre>
-                <p><em>on 设置 swoole_http_server 事件回调函数</em></p>
+                <pre class="signature" style="margin-right: 54px;">on(string  <span class="argument">$event_name</span>, callable  <span class="argument">$callback</span>) : boolean</pre>
+                <p><em>注册 Server 的事件回调函数</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$event_name </td>
-                                <td></td>
-                            </tr>
-                                                    <tr>
-                                <td></td>
-                                <td>$callback </td>
-                                <td><pre><code class="language-php">swoole_http_server 事件列表
-Start    master 进程，master 进程启动后调用
-Shutdown master 进程，master 进程退出
+                                <td><p>事件名，不区分大小写</p>
+<pre><code class="language-php">swoole_server 事件列表
+Start    master 进程，master 进程启动后触发该事件
+         函数原型：function onStart(swoole_server $server);
+                           在此事件之前Swoole Server已进行了如下操作：
+                           已创建了manager进程。
+                           已创建了worker子进程。
+                           已监听所有TCP/UDP端口。
+                           已监听了定时器。
+Shutdown master 进程，master 进程退出后触发该事件
+         函数原型：function onShutdown(swoole_server $server);
+                         在此之前Swoole Server已进行了如下操作：
+                         已关闭所有线程。
+                         已关闭所有worker进程。
+                         已close所有TCP/UDP监听端口。
+                         已关闭主Rector。
+ManagerStart manager 进程，manager 进程启动后触发该事件
+             函数原型：function onManagerStart(swoole_server $serv);
+                         在这个回调函数中可以修改管理进程的名称
+ManagerStop  manager 进程，manager 进程退出后触发该事件
+             函数原型：function onManagerStop(swoole_server $serv);
+WorkerError  manager 进程，worker 进程出错后触发该事件
+             函数原型：function onWorkerError(
+                                 swoole_server $serv,
+                                 int $worker_id, int $worker_pid,
+                                 int $exit_code, int $signal);
+                              $worker_pid 是异常进程的ID。
+                              $exit_code 退出的状态码，范围是 1 ～255。
+                              $signal 进程退出的信号。
+Connect  worker 进程，客户端连接后触发该事件
+         函数原型：function onConnect(swoole_server $server,
+                                    int $fd, int $from_id);
+                          $server 是 swoole_server 对象。
+                          $fd 是连接的文件描述符，发送数据/关闭连接时需要此参数。
+                          $from_id 来自那个 Reactor 线程。
+Receive  worker 进程，收到客户端发送的数据后触发该事件
+         函数原型：function onReceive(swoole_server $server, int $fd,
+                                    int $reactor_id, string $data);
+                 $server 是 swoole_server 对象。
+                 $fd 是连接的文件描述符，发送数据/关闭连接时需要此参数。
+                 $from_id 来自那个 Reactor 线程。
+                 $data 收到的数据
 
-ManagerStart manager 进程，manager 进程启动
-ManagerStop  manager 进程，manager 进程退出
-WorkerError  manager 进程，worker 进程出错
+                 //receive 事件回调示例
+                 $server-&gt;on('Receive',
+                              function($serv, $fd, $from_id, $data) {
+                               $serv-&gt;send($fd, 'Swoole: '.$data);
+                             });
+Close    worker 进程，客户端关闭连接后触发该事件
+         函数原型：function onClose(swoole_server $server,
+                                  int $fd, int $reactorId);
+                         $server 是swoole_server对象。
+                         $fd 是连接的文件描述符。
+                         $reactorId 来自那个reactor线程。
+Packet   worker 进程，Udp server 收到客户端发送数据后触发该事件
+         函数原型：function onPacket(swoole_server $server, string $data,
+                                   array $client_info);
+                 $server，swoole_server对象。
+                 $data，收到的数据内容，可能是文本或者二进制内容。
+                 $client_info，客户端信息包括address/port/server_socket 3项数据。
 
-Close    worker 进程，客户端关闭连接事件
-Error    worker 进程，客户端连接错误
+Task     task 进程，worker 进程向 task 进程发送数据后触发该事件
+         函数原型：function onTask(swoole_server $serv, int $task_id,
+                                 int $src_worker_id, mixed $data);
+                          $task_id       任务 id
+                          $src_worker_id 发送数据的 worker_id
+                          $data          要发送的数据
+
 Finish   worker 进程，task 进程调用 finish 接口或 return，worker 进程触发该事件
+         函数原型：function onFinish(swoole_server $serv,
+                                   int $task_id, string $data)；
+                          $task_id是任务的ID，
+                          $data是任务处理的结果内容。
 
-WorkerStart worker/task 进程，worker/task 进程启动
-WorkerStop  worker/task 进程，worker/task 进程退出
-PipeMessage worker/task 进程，调用 $server-&gt;sendMessage 接口后，收到消息的进程触发该事件
+WorkerStart worker/task 进程，worker/task 进程启动后触发该事件
+            函数原型：function onWorkerStart(swoole_server $server,
+                                           int $worker_id)
+            可以通过$worker_id参数的值，判断worker是普通worker还是task_worker。
+            $worker_id&gt;= $serv-&gt;setting['worker_num'] 时表示这个进程是task_worker。
+            $worker_id是一个 [0, $worker_num] 之间的数字，
+            表示这个worker进程的ID，$worker_id和进程PID没有任何关系
+WorkerStop  worker/task 进程，worker/task 进程退出后触发该事件
+            函数原型：function onWorkerStop(swoole_server $server,
+                                          int $worker_id);
+                              $worker_id 退出进程的 id 号
+PipeMessage worker/task 进程，调用 $server-&gt;sendMessage 接口后，收到消息的进程触发
+            函数原型：function onPipeMessage(swoole_server $server,
+                                           int $from_worker_id,
+                                           string $message);
+                              $from_worker_id 消息来自哪个进程
+                              $message 消息内容
 
-Task        task 进程，worker 进程向 task 进程发送数据
-
-Request   worker 进程，服务端收到一个完整的 http 请求后，调用此函数。onRequest 回调会销毁 $request 和 $response 对象
-$http_server-&gt;on('request', function ($request, $response) {
+//http_server 新增事件
+Request   worker 进程，服务端收到一个完整的 http 请求后，调用此函数。
+                      onRequest 回调会销毁 $request 和 $response 对象
+$http_server-&gt;on('Request', function ($request, $response) {
      $response-&gt;end("&lt;h1&gt;Hello Swoole. #".rand(1000, 9999)."&lt;/h1&gt;");
 });</code></pre></td>
+                            </tr>
+                                                    <tr>
+                                <td>callable</td>
+                                <td>$callback </td>
+                                <td><p>发生 $event_name 事件时的回调函数</p></td>
                             </tr>
                                             </table>
                 
                 
                                     <h4>Returns</h4>
-                    
+                    boolean
+                                            &mdash; <p>成功返回 true，失败返回 false</p>
                                     				
                             </article>
         </div>
@@ -559,7 +636,7 @@ $http_server-&gt;on('request', function ($request, $response) {
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -595,7 +672,7 @@ $http_server-&gt;on('request', function ($request, $response) {
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -649,7 +726,7 @@ $http_server-&gt;on('request', function ($request, $response) {
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -703,7 +780,7 @@ $http_server-&gt;on('request', function ($request, $response) {
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -728,7 +805,8 @@ $http_server-&gt;on('request', function ($request, $response) {
                                 <td><p>数组，key-&gt;value 形式的配置项</p>
 <pre><code class="language-php">参考 swoole_server-&gt;set 中配置选项，http_server 额外增加了如下配置：
 upload_tmp_dir  设置上传文件的临时目录
-http_parse_post 设置POST消息解析开关，选项为true时自动将Content-Type为x-www-form-urlencoded的请求包体解析到POST数组。
+http_parse_post 设置POST消息解析开关，选项为true时自动将Content-Type为
+                x-www-form-urlencoded的请求包体解析到POST数组。
                 设置为false时将关闭POST解析。</code></pre></td>
                             </tr>
                                             </table>
@@ -751,7 +829,7 @@ http_parse_post 设置POST消息解析开关，选项为true时自动将Content-
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -795,7 +873,7 @@ http_parse_post 设置POST消息解析开关，选项为true时自动将Content-
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -844,7 +922,7 @@ http_parse_post 设置POST消息解析开关，选项为true时自动将Content-
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -858,10 +936,9 @@ http_parse_post 设置POST消息解析开关，选项为true时自动将Content-
                 <h3 class="public ">sendfile()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">sendfile(integer  <span class="argument">$conn_fd</span>, string  <span class="argument">$filename</span>) : boolean</pre>
-                <p><em>sendfile 发送文件到 TCP 客户端连接
-sendfile 函数调用 OS 提供的 sendfile 系统调用，由操作系统直接读取文件并写入 socket。
-sendfile 只有2次内存拷贝，使用此函数可以降低发送大量文件时操作系统的 CPU 和内存占用。</em></p>
-                
+                <p><em>sendfile 发送文件到 TCP 客户端连接</em></p>
+                <pre><code class="language-php"> sendfile 函数调用 OS 提供的 sendfile 系统调用，由操作系统直接读取文件并写入 socket。
+ sendfile 只有2次内存拷贝，使用此函数可以降低发送大量文件时操作系统的 CPU 和内存占用。</code></pre>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
@@ -895,7 +972,7 @@ sendfile 只有2次内存拷贝，使用此函数可以降低发送大量文件�
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -944,7 +1021,7 @@ sendfile 只有2次内存拷贝，使用此函数可以降低发送大量文件�
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -994,7 +1071,7 @@ sendfile 只有2次内存拷贝，使用此函数可以降低发送大量文件�
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -1008,10 +1085,10 @@ sendfile 只有2次内存拷贝，使用此函数可以降低发送大量文件�
                 <h3 class="public ">finish()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">finish(mixed  <span class="argument">$data</span>) : boolean</pre>
-                <p><em>用于在 task 进程中通知 worker 进程，投递的任务已完成，此函数可以传递结果数据给 worker 进程
-要在 task 进程中调用 finish 函数，必须为 Server 设置 onFinish 回调函数。此函数只可用于 task 进程的 onTask 回调中
-在 task 进程中，return 数据同样会触发 onFinish 事件。</em></p>
-                
+                <p><em>用于在 task 进程中通知 worker 进程，投递的任务已完成，此函数可以传递结果数据给 worker 进程</em></p>
+                <pre><code class="language-php"> 要在 task 进程中调用 finish 函数，必须为 Server 设置 onFinish 回调函数。
+ 此函数只可用于 task 进程的 onTask 回调中
+ 在 task 进程中，return 数据同样会触发 onFinish 事件。</code></pre>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
@@ -1040,7 +1117,7 @@ sendfile 只有2次内存拷贝，使用此函数可以降低发送大量文件�
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -1055,8 +1132,9 @@ sendfile 只有2次内存拷贝，使用此函数可以降低发送大量文件�
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">reload(boolean  <span class="argument">$only_reload_taskworkrer = false</span>) : boolean</pre>
                 <p><em>reload  重启所有worker 进程</em></p>
-                <pre><code>Reload操作只能重新载入Worker进程启动后加载的PHP文件，建议使用get_included_files函数来列出哪些文件是在WorkerStart之前就加载的PHP文件，
-在此列表中的PHP文件，即使进行了reload操作也无法重新载入。比如要关闭服务器重新启动才能生效。</code></pre>
+                <pre><code class="language-php"> Reload操作只能重新载入Worker进程启动后加载的PHP文件，
+ 建议使用get_included_files函数来列出哪些文件是在WorkerStart之前就加载的PHP文件，
+ 在此列表中的PHP文件，即使进行了reload操作也无法重新载入。比如要关闭服务器重新启动才能生效。</code></pre>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
@@ -1085,7 +1163,7 @@ sendfile 只有2次内存拷贝，使用此函数可以降低发送大量文件�
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -1118,7 +1196,7 @@ sendfile 只有2次内存拷贝，使用此函数可以降低发送大量文件�
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -1162,7 +1240,7 @@ sendfile 只有2次内存拷贝，使用此函数可以降低发送大量文件�
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -1178,13 +1256,15 @@ sendfile 只有2次内存拷贝，使用此函数可以降低发送大量文件�
                 <pre class="signature" style="margin-right: 54px;">getLastError() : integer</pre>
                 <p><em>getLastError 获取最近一次操作错误的错误码，业务代码中可以根据错误码类型执行不同的逻辑。</em></p>
                 <pre><code> 常见发送失败错误
- 1001 连接已经被Server端关闭了，出现这个错误一般是代码中已经执行了$serv-&gt;close()关闭了某个连接，但仍然调用$serv-&gt;send()向这个连接发送数据
+ 1001 连接已经被Server端关闭了，出现这个错误一般是代码中已经执行了$serv-&gt;close()关闭了某个连接，
+      但仍然调用$serv-&gt;send()向这个连接发送数据
  1002 连接已被Client端关闭了，Socket已关闭无法发送数据到对端
  1003 正在执行close，onClose回调函数中不得使用$serv-&gt;send()
  1004 连接已关闭
 1005 连接不存在，传入$fd 可能是错误的
 1007 接收到了超时的数据，TCP关闭连接后，可能会有部分数据残留在管道缓存区内，这部分数据会被丢弃
-1008 发送缓存区已满无法执行send操作，出现这个错误表示这个连接的对端无法及时收数据导致发送缓存区已塞满
+1008 发送缓存区已满无法执行send操作，
+      出现这个错误表示这个连接的对端无法及时收数据导致发送缓存区已塞满
 常见发送失败错误</code></pre>
 
                 
@@ -1206,7 +1286,7 @@ sendfile 只有2次内存拷贝，使用此函数可以降低发送大量文件�
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -1248,7 +1328,7 @@ sendfile 只有2次内存拷贝，使用此函数可以降低发送大量文件�
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -1308,7 +1388,7 @@ sendfile 只有2次内存拷贝，使用此函数可以降低发送大量文件�
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -1359,7 +1439,7 @@ sendfile 只有2次内存拷贝，使用此函数可以降低发送大量文件�
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -1373,7 +1453,7 @@ sendfile 只有2次内存拷贝，使用此函数可以降低发送大量文件�
                 <h3 class="public ">denyRequest()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">denyRequest(integer  <span class="argument">$worker_id</span>) : boolean|void</pre>
-                <p><em>denyRequest worker process 拒绝服务?</em></p>
+                <p><em>denyRequest id 号为 $worker_id 的 worker 进程不再接收新的请求</em></p>
                 
 
                                     <h4>Parameters</h4>
@@ -1381,7 +1461,7 @@ sendfile 只有2次内存拷贝，使用此函数可以降低发送大量文件�
                                                     <tr>
                                 <td>integer</td>
                                 <td>$worker_id </td>
-                                <td><p>指定worker id</p></td>
+                                <td><p>指定worker 进程 id</p></td>
                             </tr>
                                             </table>
                 
@@ -1403,15 +1483,7 @@ sendfile 只有2次内存拷贝，使用此函数可以降低发送大量文件�
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
-                                                    </td>
-                    </tr>
-                                    <tr>
-                        <th>
-                            todo
-                        </th>
-                        <td>
-                                                                                            <p>具体语义待查证</p>
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -1460,7 +1532,7 @@ sendfile 只有2次内存拷贝，使用此函数可以降低发送大量文件�
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -1504,7 +1576,7 @@ sendfile 只有2次内存拷贝，使用此函数可以降低发送大量文件�
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -1550,7 +1622,7 @@ sendfile 只有2次内存拷贝，使用此函数可以降低发送大量文件�
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -1595,7 +1667,7 @@ sendfile 只有2次内存拷贝，使用此函数可以降低发送大量文件�
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -1647,7 +1719,7 @@ sendfile 只有2次内存拷贝，使用此函数可以降低发送大量文件�
                             since
                         </th>
                         <td>
-                                                            3.0.4                                
+                                                            3.1.0                                
                                                     </td>
                     </tr>
                             </table>
@@ -1703,7 +1775,7 @@ sendfile 只有2次内存拷贝，使用此函数可以降低发送大量文件�
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on June 14th, 2017 at 15:26.
+                    on June 15th, 2017 at 15:46.
                 </section>
             </section>
         </section>

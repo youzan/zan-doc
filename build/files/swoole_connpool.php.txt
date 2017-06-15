@@ -3,7 +3,7 @@
 /**
  * class swoole_connpool
  *
- * @since 3.0.4
+ * @since 3.1.0
  *
  * @package swoole_connpool
  */
@@ -11,7 +11,7 @@
 /**
  * class swoole_connpool
  *
- * @since 3.0.4
+ * @since 3.1.0
  */
 class swoole_connpool
 {
@@ -49,7 +49,7 @@ class swoole_connpool
     /**
      * swoole_connpool constructor.
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param int $connPoolType ，连接池类型
      * ```php
@@ -63,7 +63,7 @@ class swoole_connpool
     /**
      * setCfg 连接配置，支持重置
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param array $cfg
      * @param array $cfg 连接池连接配置信息, createConnpool 会对该参数进行校验
@@ -91,7 +91,7 @@ class swoole_connpool
     /**
      * createConnPool 创建连接池，接口内部对所有已经设置的参数进行校验
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param int $minPoolnum 连接池最小对象个数
      * @param int $maxPoolnum 连接池最大对象个数
@@ -103,7 +103,7 @@ class swoole_connpool
     /**
      *  on 设置回调函数
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param string $cbName 回调名称
      * ```php
@@ -136,14 +136,15 @@ class swoole_connpool
     /**
      * get 获取连接对象
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param int $timeout 超时时间，单位ms
      * @param callable $objCall 回调函数，函数原型参见connObjCallback
      * ```php				  
      * connObjCallback 获取连接对象结果回调
      *   @param $pool swoole_connpool 连接池对象
-     *   @param $conObj  false：获取连接连接超时，其他，为连接对象，如tcp连接池，conObj为swoole_client类型；
+     *   @param $conObj  false：获取连接连接超时，其他，为连接对象，
+     *                          如tcp连接池，conObj为swoole_client类型；
      *   function connObjCallback(swoole_connpool $pool,$conObj){}
      * ```
      *
@@ -154,7 +155,7 @@ class swoole_connpool
     /**
      * release 释放连接对象，会对用户参数进行校验
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param $connObj 连接对象，如tcp连接池时，为swoole_client类型
      * @param int $conStatus 可选，默认为swoole_connpool::SWOOLE_CONNNECT_OK
@@ -171,7 +172,7 @@ class swoole_connpool
     /**
      * destroy 销毁连接池对象，调用此接口前，需要将连接对象全部释放，调用此接口后，不能再使用该连接池其他方法
      * 
-     * @since 3.0.4
+     * @since 3.1.0
      */
     public function destroy() { }
 
@@ -179,7 +180,7 @@ class swoole_connpool
     /**
      * getStatInfo 获取连接状态
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @return  array
      * ```php

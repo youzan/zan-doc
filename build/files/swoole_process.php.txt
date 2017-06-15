@@ -3,7 +3,7 @@
 /**
  * class swoole_process
  *
- * @since 3.0.4
+ * @since 3.1.0
  *
  * @package swoole_process
  */
@@ -11,7 +11,7 @@
 /**
  * class swoole_process 进程管理模块，用来替代 PHP 的 pcntl 扩展
  *
- * @since 3.0.4
+ * @since 3.1.0
  */
 class swoole_process
 {
@@ -42,7 +42,7 @@ class swoole_process
     /**
      * __construct 创建子进程
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param callable $callback 子进程创建成功后要执行的函数入口
      * @param bool     $redirect_stdin_and_stdout [optional] 重定向子进程的标准输入和输出。
@@ -58,7 +58,7 @@ class swoole_process
     /**
      * __destruct 子进程析构函数
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @return
      */
@@ -69,7 +69,7 @@ class swoole_process
     /**
      * wait 回收结束运行的子进程，必须要执行 wait 回收结束运行的子进程，否则子进程就会变成僵尸进程
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param $blocking [optional]
      *
@@ -84,7 +84,7 @@ class swoole_process
     /**
      * signal 设置要异步监听的信号，只能用于异步程序中
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param int      $signo 信号值
      * @param callable $callback 回调函数，如果 $callback=null，则表示移除信号监听
@@ -98,7 +98,7 @@ class swoole_process
     /**
      * kill 向指定子进程发送信号
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param int $pid 子进程的进程号
      * @param int $sig [optional] 可选参数，默认为 SIGTERM。$sig=0，可以检测进程是否存在，不会发送信号
@@ -112,7 +112,7 @@ class swoole_process
     /**
      * daemon 使当前进程变为一个守护进程
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param bool $nochdir [optional] 为 true 时，表示不要切换当前目录到根目录
      * @param bool $noclose [optional] 为 true 时，表示不要关闭标准输入输出文件描述符
@@ -126,7 +126,7 @@ class swoole_process
     /**
      * setaffinity 设置CPU亲和性，可以将进程绑定到特定的CPU核上。
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param array $cpu_set 数组，表示绑定哪些CPU核，如 array(0,2,3) 表示绑定CPU0/CPU2/CPU3
      *
@@ -139,7 +139,7 @@ class swoole_process
     /**
      * useQueue 启用消息队列作为进程间通信
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param int $msgkey [optional] 消息队列的key，默认会使用ftok(__FILE__, 1)作为KEY
      * @param int $mode [optional]   通信模式，默认值为 2，表示争抢模式，所有创建的子进程都会从消息队列中取数据
@@ -153,7 +153,7 @@ class swoole_process
     /**
      * freeQueue 删除消息队列。此方法与useQueue成对使用，useQueue创建队列，使用freeQueue销毁队列。销毁队列后队列中的数据会被清空。
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @return bool 成功返回 true，失败返回 false
      */
@@ -164,7 +164,7 @@ class swoole_process
     /**
      * start 执行fork系统调用，启动进程
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @return int|false 创建成功返回子进程的PID，创建失败返回false。可使用swoole_errno和swoole_strerror得到错误码和错误信息。
      */
@@ -175,7 +175,7 @@ class swoole_process
     /**
      * write 向管道内写入数据
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param string $data 要写入管道的数据
      *                     $data的长度在Linux系统下最大不超过8K，MacOS/FreeBSD下最大不超过2K
@@ -191,7 +191,7 @@ class swoole_process
     /**
      * close 闭创建的好的管道
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @return int|false 成功返回 errno，失败返回 false
      */
@@ -202,7 +202,7 @@ class swoole_process
     /**
      * read 从管道中读取数据
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param int $buf_size [optional] 缓冲区的大小，默认为8192，最大不超过64K
      *
@@ -215,7 +215,7 @@ class swoole_process
     /**
      * push 投递数据到消息队列中
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param string $data 要投递的数据，长度受限与操作系统内核参数的限制。默认为8192，最大不超过65536
      *
@@ -230,7 +230,7 @@ class swoole_process
     /**
      * pop 从队列中取数据
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param int $maxsize [optional] 表示获取数据的最大长度，默认值为 8192，最大不超过 64k
      *
@@ -245,7 +245,7 @@ class swoole_process
     /**
      * exit
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param $ret_code [optional]
      *
@@ -258,7 +258,7 @@ class swoole_process
      *      执行成功后，当前进程的代码段将会被新程序替换。子进程蜕变成另外一套程序。父进程与当前进程仍然是父子进程关系。
      *      父进程与新进程之间可以通过可以通过标准输入输出进行通信，必须启用标准输入输出重定向。
      *
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param string $execfile 指定可执行文件的绝对路径，如 "/usr/bin/python"
      * @param array  $args 数组，是 exec 的参数列表，如 array('test.py', 123)，相当与 python test.py 123
@@ -272,7 +272,7 @@ class swoole_process
     /**
      * name 修改进程名称。此函数是 swoole_set_process_name 的别名
      *      在执行exec后，进程名称会被新的程序重新设置
-     * @since 3.0.4
+     * @since 3.1.0
      *
      * @param string $process_name 进程名称
      *
