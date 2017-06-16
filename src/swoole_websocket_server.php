@@ -443,7 +443,7 @@ class swoole_websocket_server /*extends \swoole_http_server*/
      * @param int    $port 要监听的端口
      * @param int    $sock_type socket类型，参考构造函数中的 $sock_type
      *
-     * @return \swoole_server_port|false 成功返回 swoole_server 对象，失败返回 false
+     * @return \swoole_server_port|false 成功返回 swoole_server_port 对象，失败返回 false
      */
     public function listen($host, $port, $sock_type)
     {
@@ -458,7 +458,7 @@ class swoole_websocket_server /*extends \swoole_http_server*/
      * @param int    $port 要监听的端口
      * @param int    $sock_type socket类型，参考构造函数中的 $sock_type
      *
-     * @return \swoole_server_port|false 成功返回 swoole_server 对象，失败返回 false
+     * @return \swoole_server_port|false 成功返回 swoole_server_port 对象，失败返回 false
      */
     public function addlistener($host, $port, $sock_type)
     {
