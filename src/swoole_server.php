@@ -550,7 +550,6 @@ class swoole_server
      *                     与user配置相同，此配置是修改进程所属用户组，提升服务器程序的安全性。
      * chroot              重定向Worker进程的文件系统根目录。
      *                     此设置可以使进程对文件系统的读写与实际的操作系统文件系统隔离。提升安全性。
-     * pid_file            Server启动时自动将master进程的PID写到文件，Server关闭时自动删除PID文件。
      * pipe_buffer_size    调整管道通信的内存缓存区长度。Swoole使用Unix Socket实现进程间通信。
      * buffer_output_size  配置发送缓存区尺寸。
      * enable_unsafe_event swoole在配置dispatch_mode=1或3后，
