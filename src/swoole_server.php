@@ -516,9 +516,17 @@ class swoole_server
      * task_tmpdir      设置task的数据临时目录，server 中如果投递的数据超过 8192 字节，
      *                  将会启用临时文件保存数据
      * message_queue_key 设置消息队列的 key，仅在 task_ipc_mode = 2/3 时使用；
-     * log_file          指定 swoole_server 的错误日志，默认打印到屏幕
-     * log_level         swooler_server 的错误日志打印级别，范围是 0-5，
-     *                   低于 log_level 的日志信息不会抛出
+     * log_file          指定 swoole_server 的日志输出，默认打印到屏幕
+     * log_level         swooler_server 的错误日志打印级别，范围是 1-7，低于 log_level 的日志信息不会抛出
+     * 					 用户可在php.ini中设置zan.log_level或者环境变量ZANEXT_DEBUG_LOG_LEVEL修改log_level
+     * 					 1 --- debug 
+     * 					 2 --- trace 
+     * 					 3 --- info
+     * 					 4 --- notice
+     * 					 5 --- warning 
+     * 					 6 --- error
+     * 					 7 --- fatal error   （进程会退出）
+     *                   
      * heartbeat_check_interval 启用心跳检测，单位为秒；如 heartbeat_check_interval => 60，
      *                          表示每隔 60 秒，遍历所有连接，如果该连接在60秒内，
      *                          没有向服务器发送任何数据，此连接将被强制关闭。
