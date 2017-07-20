@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1003136725"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1269428858"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1003136725" class="accordion-body collapse in">
+            <div id="namespace-1269428858" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -894,9 +894,17 @@ package_max_length  设置最大数据包尺寸，单位为字节，开启
 task_tmpdir      设置task的数据临时目录，server 中如果投递的数据超过 8192 字节，
                  将会启用临时文件保存数据
 message_queue_key 设置消息队列的 key，仅在 task_ipc_mode = 2/3 时使用；
-log_file          指定 swoole_server 的错误日志，默认打印到屏幕
-log_level         swooler_server 的错误日志打印级别，范围是 0-5，
-                  低于 log_level 的日志信息不会抛出
+log_file          指定 swoole_server 的日志输出，默认打印到屏幕
+log_level         swooler_server 的错误日志打印级别，范围是 1-7，低于 log_level 的日志信息不会抛出
+                     用户可在php.ini中设置zan.log_level或者环境变量ZANEXT_DEBUG_LOG_LEVEL修改log_level
+                     1 --- debug
+                     2 --- trace
+                     3 --- info
+                     4 --- notice
+                     5 --- warning
+                     6 --- error
+                     7 --- fatal error   （进程会退出）
+
 heartbeat_check_interval 启用心跳检测，单位为秒；如 heartbeat_check_interval =&gt; 60，
                          表示每隔 60 秒，遍历所有连接，如果该连接在60秒内，
                          没有向服务器发送任何数据，此连接将被强制关闭。
@@ -1902,13 +1910,45 @@ UDP 服务，$fd 保存的是客户端 ip(网络字节序)，$from_id 保存 por
                                             &mdash; <p>返回 server 的统计信息，示例如下：</p>
 <pre><code>Array
 (
-[start_time] =&gt; 1495680500
-[connection_num] =&gt; 1
-[accept_count] =&gt; 1
-[close_count] =&gt; 0
-[tasking_num] =&gt; 0
-[request_count] =&gt; 0
-[worker_request_count] =&gt; 0
+    [start_time] =&gt; 1500516248       // server启动时间
+    [last_reload] =&gt; 0               // 上次reload时间
+    [connection_num] =&gt; 1            // 当前连接数，在accept时+1，close时-1
+    [accept_count] =&gt; 1              // accept总数
+    [close_count] =&gt; 0               // close总数
+    [tasking_num] =&gt; 0               // 当前正在处理的task总数
+    [request_count] =&gt; 0             // worker已处理请求总数
+    [total_worker] =&gt; 1              // 总的worker进程数
+    [total_task_worker] =&gt; 1         // 总的task_worker进程数
+    [active_worker] =&gt; 1             // 当前活动的worker进程数
+    [idle_worker] =&gt; 0               // 当前空闲的worker进程数
+    [active_task_worker] =&gt; 0        // 当前活动的task_worker进程数
+    [idle_task_worker] =&gt; 1          // 当前空闲的task_worker进程数
+    [max_active_worker] =&gt; 1         // 从server启动起，最大活动worker进程数
+    [max_active_task_worker] =&gt; 0    // 从server启动起，最大活动task_worker进程数
+    [worker_normal_exit] =&gt; 0        // worker进程正常退出次数（reload, 触发max_request等)
+    [worker_abnormal_exit] =&gt; 0      // worker进程异常退出次数
+    [task_worker_normal_exit] =&gt; 0   // task_worker进程正常退出次数（reload, 触发max_request等)
+    [task_worker_abnormal_exit] =&gt; 0 // task_worker进程异常退出次数
+    [workers_detail] =&gt; Array
+    (
+        [0] =&gt; Array                     // worker进程id（非系统pid）
+        (
+            [start_time] =&gt; 1500516248   // 进程启动时间
+            [total_request_count] =&gt; 0   // 从server启动开始，接收处理的总请求数
+            [request_count] =&gt; 0         // 从worker进程启动开始，接收处理的总请求数
+            [status] =&gt; BUSY             // 进程状态，有BUSY和IDLE两种
+            [type] =&gt; worker             // 进程类型，有worker和task_worker两种
+        )
+
+        [1] =&gt; Array
+        (
+            [start_time] =&gt; 1500516248
+            [total_request_count] =&gt; 0
+            [request_count] =&gt; 0
+            [status] =&gt; IDLE
+            [type] =&gt; task_worker
+        )
+    )
 )</code></pre>
                                     				
                             </article>
@@ -2077,7 +2117,7 @@ UDP 服务，$fd 保存的是客户端 ip(网络字节序)，$from_id 保存 por
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on June 18th, 2017 at 14:44.
+                    on July 20th, 2017 at 02:23.
                 </section>
             </section>
         </section>

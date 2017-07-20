@@ -516,9 +516,17 @@ class swoole_server
      * task_tmpdir      设置task的数据临时目录，server 中如果投递的数据超过 8192 字节，
      *                  将会启用临时文件保存数据
      * message_queue_key 设置消息队列的 key，仅在 task_ipc_mode = 2/3 时使用；
-     * log_file          指定 swoole_server 的错误日志，默认打印到屏幕
-     * log_level         swooler_server 的错误日志打印级别，范围是 0-5，
-     *                   低于 log_level 的日志信息不会抛出
+     * log_file          指定 swoole_server 的日志输出，默认打印到屏幕
+     * log_level         swooler_server 的错误日志打印级别，范围是 1-7，低于 log_level 的日志信息不会抛出
+     * 					 用户可在php.ini中设置zan.log_level或者环境变量ZANEXT_DEBUG_LOG_LEVEL修改log_level
+     * 					 1 --- debug
+     * 					 2 --- trace
+     * 					 3 --- info
+     * 					 4 --- notice
+     * 					 5 --- warning
+     * 					 6 --- error
+     * 					 7 --- fatal error   （进程会退出）
+     *
      * heartbeat_check_interval 启用心跳检测，单位为秒；如 heartbeat_check_interval => 60，
      *                          表示每隔 60 秒，遍历所有连接，如果该连接在60秒内，
      *                          没有向服务器发送任何数据，此连接将被强制关闭。
@@ -904,13 +912,45 @@ class swoole_server
      * ```
      * Array
      * (
-     * [start_time] => 1495680500
-     * [connection_num] => 1
-     * [accept_count] => 1
-     * [close_count] => 0
-     * [tasking_num] => 0
-     * [request_count] => 0
-     * [worker_request_count] => 0
+     *     [start_time] => 1500516248       // server启动时间
+     *     [last_reload] => 0               // 上次reload时间
+     *     [connection_num] => 1            // 当前连接数，在accept时+1，close时-1
+     *     [accept_count] => 1              // accept总数
+     *     [close_count] => 0               // close总数
+     *     [tasking_num] => 0               // 当前正在处理的task总数
+     *     [request_count] => 0             // worker已处理请求总数
+     *     [total_worker] => 1              // 总的worker进程数
+     *     [total_task_worker] => 1         // 总的task_worker进程数
+     *     [active_worker] => 1             // 当前活动的worker进程数
+     *     [idle_worker] => 0               // 当前空闲的worker进程数
+     *     [active_task_worker] => 0        // 当前活动的task_worker进程数
+     *     [idle_task_worker] => 1          // 当前空闲的task_worker进程数
+     *     [max_active_worker] => 1         // 从server启动起，最大活动worker进程数
+     *     [max_active_task_worker] => 0    // 从server启动起，最大活动task_worker进程数
+     *     [worker_normal_exit] => 0        // worker进程正常退出次数（reload, 触发max_request等)
+     *     [worker_abnormal_exit] => 0      // worker进程异常退出次数
+     *     [task_worker_normal_exit] => 0   // task_worker进程正常退出次数（reload, 触发max_request等)
+     *     [task_worker_abnormal_exit] => 0 // task_worker进程异常退出次数
+     *     [workers_detail] => Array
+     *     (
+     *         [0] => Array                     // worker进程id（非系统pid）
+     *         (
+     *             [start_time] => 1500516248   // 进程启动时间
+     *             [total_request_count] => 0   // 从server启动开始，接收处理的总请求数
+     *             [request_count] => 0         // 从worker进程启动开始，接收处理的总请求数
+     *             [status] => BUSY             // 进程状态，有BUSY和IDLE两种
+     *             [type] => worker             // 进程类型，有worker和task_worker两种
+     *         )
+
+     *         [1] => Array
+     *         (
+     *             [start_time] => 1500516248
+     *             [total_request_count] => 0
+     *             [request_count] => 0
+     *             [status] => IDLE
+     *             [type] => task_worker
+     *         )
+     *     )
      * )
      * ```
      */
@@ -935,7 +975,7 @@ class swoole_server
     /**
      * bind 将连接 $fd 绑定到用户自定义$uid,设置 dispatch_mode=5，设置此 $uid 值进行 hash 固定分配，
      * 可以保证某一个 $uid 的连接全部会分配到同一个Worker进程。
-     * 
+     *
 	 * ```
 	 * 在默认的dispatch_mode=2设置下，server会按照socket fd来分配连接数据到不同的worker。
 	 * 因为fd是不稳定的，一个客户端断开后重新连接，fd会发生改变。这样这个客户端的数据就会被分配到别的Worker。
