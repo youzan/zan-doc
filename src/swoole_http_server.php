@@ -707,13 +707,44 @@ class swoole_http_server/* extends \swoole_server*/
      * ```php
      * Array
      * (
-     * [start_time] => 1495680500
-     * [connection_num] => 1
-     * [accept_count] => 1
-     * [close_count] => 0
-     * [tasking_num] => 0
-     * [request_count] => 0
-     * [worker_request_count] => 0
+     *     [start_time] => 1500516248       // server启动时间
+     *     [last_reload] => 0               // 上次reload时间
+     *     [connection_num] => 1            // 当前连接数，在accept时+1，close时-1
+     *     [accept_count] => 1              // accept总数
+     *     [close_count] => 0               // close总数
+     *     [tasking_num] => 0               // 当前正在处理的task总数
+     *     [request_count] => 0             // worker已处理请求总数
+     *     [total_worker] => 1              // 总的worker进程数
+     *     [total_task_worker] => 1         // 总的task_worker进程数
+     *     [active_worker] => 1             // 当前活动的worker进程数
+     *     [idle_worker] => 0               // 当前空闲的worker进程数
+     *     [active_task_worker] => 0        // 当前活动的task_worker进程数
+     *     [idle_task_worker] => 1          // 当前空闲的task_worker进程数
+     *     [max_active_worker] => 1         // 从server启动起，最大活动worker进程数
+     *     [max_active_task_worker] => 0    // 从server启动起，最大活动task_worker进程数
+     *     [worker_normal_exit] => 0        // worker进程正常退出次数（reload, 触发max_request等)
+     *     [worker_abnormal_exit] => 0      // worker进程异常退出次数
+     *     [task_worker_normal_exit] => 0   // task_worker进程正常退出次数（reload, 触发max_request等)
+     *     [task_worker_abnormal_exit] => 0 // task_worker进程异常退出次数
+     *     [workers_detail] => Array
+     *     (
+     *         [0] => Array                     // worker进程id（非系统pid）
+     *         (
+     *             [start_time] => 1500516248   // 进程启动时间
+     *             [total_request_count] => 0   // 从server启动开始，接收处理的总请求数
+     *             [request_count] => 0         // 从worker进程启动开始，接收处理的总请求数
+     *             [status] => BUSY             // 进程状态，有BUSY和IDLE两种
+     *             [type] => worker             // 进程类型，有worker和task_worker两种
+     *         )
+     *         [1] => Array
+     *         (
+     *             [start_time] => 1500516248
+     *             [total_request_count] => 0
+     *             [request_count] => 0
+     *             [status] => IDLE
+     *             [type] => task_worker
+     *         )
+     *     )
      * )
      * ```
      */
