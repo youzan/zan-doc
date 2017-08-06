@@ -129,10 +129,10 @@ class swoole_http_client
     public function set(array $settings)
     {
     }
-    
+
     /**
      * setReqTimeout 设置http请求超时时间，对websocket无效
-     * 
+     *
      * @param int $timeout 单位ms，设置为0时，不超时
      */
     public function setReqTimeout(int $timeout) {}
@@ -173,7 +173,7 @@ class swoole_http_client
 
     /**
      * setCookies 设置 cookie
-     * 
+     *
      * @since 3.1.0
      *
      * @param array $cookies 设置cookies，须为键值对应数组形式
@@ -325,20 +325,20 @@ class swoole_http_client
      *                 函数原型参考onConnect，onError，onClose，onMessage
      * ```php
      * param swoole_http_client $client   http_client对象
-     * function onConnect($swoole_http_client $client)
+     * function onConnect(swoole_http_client $client)
      * ```
      * ```php
      * param swoole_http_client $client   http_client对象
-     * function onError($swoole_http_client $client);
+     * function onError(swoole_http_client $client);
      * ```
      *```php
-     *param swoole_http_client $client   http_client对象
-     *function onClose($swoole_http_client $client)
+     * param swoole_http_client $client   http_client对象
+     * function onClose(swoole_http_client $client)
      *```
      *```php
-     *param swoole_http_client $client   http_client对象
-     *param swoole_websocket_frame       websocket 对象
-     *function onMessage(swoole_http_client $client, swoole_websocket_frame $frame);
+     * param swoole_http_client $client   http_client对象
+     * param swoole_websocket_frame       websocket 对象
+     * function onMessage(swoole_http_client $client, swoole_websocket_frame $frame);
      *```
      *
      * @return bool 成功返回 true，失败返回 false
