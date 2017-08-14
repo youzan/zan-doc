@@ -189,7 +189,7 @@ class swoole_process
     }
 
     /**
-     * close 闭创建的好的管道
+     * close 关闭创建的好的管道
      *
      * @since 3.1.0
      *
